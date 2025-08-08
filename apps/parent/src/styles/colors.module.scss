@@ -1,0 +1,83 @@
+$primary: rgba(19, 13, 56, 1);
+$secondary: rgba(231, 231, 255, 1);
+$ternary1: rgba(255, 255, 255, 1);
+$ternary2: rgba(255, 255, 255, 0.9);
+$ternary3: rgb(244, 244, 244);
+
+$grey1: rgba(0, 0, 0, 0.5);
+$grey2: rgba(113, 113, 113, 1);
+$grey3: rgba(178, 178, 178, 1);
+$grey4: rgba(176, 176, 176, 1);
+$grey5: rgb(217, 217, 217);
+
+$blackText: rgba(34, 34, 34, 1);
+$greenText: rgba(22, 163, 74, 1);
+$orangeText: rgba(255, 187, 56, 1);
+$blueText: rgba(71, 135, 253, 1);
+$primaryText: rgba(74, 58, 255, 1);
+$secondaryText: rgba(200, 147, 253, 1);
+$ternaryText: rgba(122, 40, 138, 1);
+
+$lightBlue: rgba(227, 242, 253, 1);
+$darkBlue: rgba(110, 156, 250, 1);
+
+$lightRed: rgba(255, 235, 238, 1);
+$darkRed: rgba(229, 57, 53, 1);
+
+$lightGreen: rgba(232, 245, 233, 1);
+$darkGreen: rgba(130, 191, 133, 1);
+
+$lightOrange: rgba(255, 243, 224, 1);
+$darkOrange: rgba(255, 178, 111, 1);
+
+$lightMaroon: rgba(252, 228, 236, 1);
+$darkMaroon: rgba(216, 27, 96, 1);
+
+$lightCyan: rgba(224, 247, 250, 1);
+$darkCyan: rgba(38, 198, 218, 1);
+
+$lightPurple: rgba(236, 233, 255, 1);
+$darkPurple: rgba(147, 114, 255, 1);
+
+:export {
+  primary: $primary;
+  secondary: $secondary;
+  ternary1: $ternary1;
+  ternary2: $ternary2;
+  ternary3: $ternary3;
+
+  grey1: $grey1;
+  grey2: $grey2;
+  grey3: $grey3;
+  grey4: $grey4;
+  grey5: $grey5;
+
+  blackText: $blackText;
+  greenText: $greenText;
+  orangeText: $orangeText;
+  blueText: $blueText;
+  primaryText: $primaryText;
+  secondaryText: $secondaryText;
+  ternaryText: $ternaryText;
+
+  lightBlue: $lightBlue;
+  darkBlue: $darkBlue;
+
+  lightRed: $lightRed;
+  darkRed: $darkRed;
+
+  lightGreen: $lightGreen;
+  darkGreen: $darkGreen;
+
+  lightOrange: $lightOrange;
+  darkOrange: $darkOrange;
+
+  lightMaroon: $lightMaroon;
+  darkMaroon: $darkMaroon;
+
+  lightCyan: $lightCyan;
+  darkCyan: $darkCyan;
+
+  lightPurple: $lightPurple;
+  darkPurple: $darkPurple;
+}

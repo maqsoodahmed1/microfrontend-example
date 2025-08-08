@@ -1,0 +1,75 @@
+export { default as ActiveCallIcon } from './icons/active-call-icon.svg';
+export { default as AnsweredCallsIcon } from './icons/answered-calls-icon.svg';
+export { default as AvailableIcon } from './icons/available-icon.svg';
+export { default as AvailableUserListIcon } from './icons/available-user-list-icon.svg';
+export { default as AvgCallDurationIcon } from './icons/avg-call-duration-icon.svg';
+export { default as BargeTransferIcon } from './icons/barge-transfer-icon.svg';
+export { default as CallIncomingIcon } from './icons/call-incoming-icon.svg';
+export { default as CallOutgoingIcon } from './icons/call-outgoing-icon.svg';
+export { default as CallerIcon } from './icons/caller-icon.svg';
+export { default as ContactBookIcon } from './icons/contact-book-icon.svg';
+export { default as ContactsBookIcon } from './icons/contacts-book-icon.svg';
+export { default as DataPhoneIcon } from './icons/dataphone-icon.svg';
+export { default as ExtensionIcon } from './icons/extension-icon.svg';
+export { default as DurationIcon } from './icons/duration-icon.svg';
+export { default as FilterIcon } from './icons/filter-icon.svg';
+export { default as HangUpIcon } from './icons/hang-up-icon.svg';
+export { default as InterceptCallIcon } from './icons/intercept-call-icon.svg';
+export { default as LiveCallsIcon } from './icons/live-calls-icon.svg';
+export { default as LoggedOutIcon } from './icons/logged-out-icon.svg';
+export { default as MissedCallsIcon } from './icons/missed-calls-icon.svg';
+export { default as OnCallIcon } from './icons/on-call-icon.svg';
+export { default as OnHoldIcon } from './icons/on-hold-icon.svg';
+export { default as RecordIcon } from './icons/record-icon.svg';
+export { default as SearchIcon } from './icons/search-icon.svg';
+export { default as ThirdPartyIcon } from './icons/third-party-icon.svg';
+export { default as ThreeDotsMenuIcon } from './icons/three-dots-menu-icon.svg';
+export { default as TotalCallDurationIcon } from './icons/total-call-duration-icon.svg';
+export { default as TotalCallsIcon } from './icons/total-calls-icon.svg';
+export { default as TotalUsersIcon } from './icons/total-users-icon.svg';
+export { default as UserListIcon } from './icons/user-list-icon.svg';
+export { default as WaitingIcon } from './icons/waiting-icon.svg';
+export { default as OngoingCallIcon } from './icons/ongoing-call-icon.svg';
+export { default as OnHoldUnfilledIcon } from './icons/on-hold-unfilled.svg';
+export { default as RecordUnfilledIcon } from './icons/record-unfilled-icon.svg';
+export { default as InterceptCallUnfilledIcon } from './icons/intercept-call-unfilled-icon.svg';
+export { default as HangUpUnfilledIcon } from './icons/hang-up-unfilled-icon.svg';
+export { default as BargeTransferUnfilledIcon } from './icons/barge-transfer-unfilled-icon.svg';
+export { default as ThirdPartyUnfilledIcon } from './icons/third-party-unfilled-icon.svg';
+export { default as IncomingCallsIcon } from './icons/incoming-calls-icon.svg';
+export { default as OutgoingCallsIcon } from './icons/outgoing-calls-icon.svg';
+export { default as ParkedCallsIcon } from './icons/parked-calls-icon.svg';
+export { default as ChevronRightIcon } from './icons/waiting-icon.svg';
+export { default as ChevronBottomIcon } from './icons/chevron-down-icon.svg';
+export { default as LiveCallsUnfilledIcon } from './icons/live-calls-unfilled-icon.svg';
+export { default as CallCenterUnfilledIcon } from './icons/call-center-unfilled-icon.svg';
+export { default as CallCenterIcon } from './icons/call-center-icon.svg';
+export { default as SmsIcon } from './icons/sms-icon.svg';
+export { default as ContactsIcon } from './icons/contacts-icon.svg';
+export { default as PbxPortalIcon } from './icons/pbx-portal-icon.svg';
+export { default as ReportIcon } from './icons/report-icon.svg';
+export { default as AdminIcon } from './icons/admin-icon.svg';
+export { default as UserIcon } from './icons/user-icon.svg';
+export { default as DataPhoneLogoIcon } from './icons/dataphone-logo-icon.svg';
+export { default as LockUnfilledIcon } from './icons/lock-unfilled-icon.svg';
+export { default as ActiveIcon } from './icons/active-icon.svg';
+export { default as InActiveIcon } from './icons/in-active-icon.svg';
+export { default as ModalHeaderBar } from './icons/modal-header-bar.svg';
+export { default as ModalCallIcon } from './icons/modal-call-icon.svg';
+export { default as CloseIcon } from './icons/close-icon.svg';
+export { default as TireIcon } from './icons/tier-icon.svg';
+export { default as DepartmentIcon } from './icons/department-icon.svg';
+export { default as CallCenterListIcon1 } from './icons/call-center-list-icon-1.svg';
+export { default as CallCenterListIcon2 } from './icons/call-center-list-icon-2.svg';
+export { default as CallCenterEndCallIcon } from './icons/call-center-end-call-icon.svg';
+export { default as AvgWaitTimeIcon } from './icons/avg-wait-icon.svg';
+export {default as MaxWaitTimeIcon} from './icons/max-wait-time.svg';
+export {default as MinWaitTimeIcon} from './icons/less-wait-time.svg';
+export {default as QueueCallIcon} from "./icons/queue-call-stats.svg"
+export {default as ActiveCallCenterIcon} from './icons/active-call-stats.svg';
+export {default as TotalCallCenterCallIcon} from './icons/total-calls-stats.svg';
+
+
+
+
+

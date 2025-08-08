@@ -1,0 +1,17 @@
+.dropdowntitle {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  .label {
+    font-size: 12px;
+    color: white;
+  }
+
+  .value {
+    min-height: 22px;
+    height: 22px;
+    font-size: 16px;
+    color: white;
+  }
+}
