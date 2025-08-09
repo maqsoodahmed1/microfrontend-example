@@ -1,0 +1,36 @@
+@use "../styles/colors.module.scss" as *;
+
+.default-layout-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  .content-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    padding: 1rem;
+    background-color: $ternary3;
+  }
+
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100vh - 4rem);
+  }
+
+  
+}
+.default-layout-loading {
+    height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $ternary3;
+  z-index: 1000;
+  }

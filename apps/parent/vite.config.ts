@@ -23,6 +23,7 @@ export default defineConfig({
     minify: false
   },
   server: {
-    port: 3000
+    port: 3000,
+    allowedHosts: ['test.dev.dataphone.cloud'],
   }
 });

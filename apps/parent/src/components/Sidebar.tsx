@@ -1,206 +1,349 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import React, {
+  useState,
+  useCallback,
+  useMemo,
+  useEffect,
+  type KeyboardEvent,
+  type ReactNode,
+  type SetStateAction,
+} from "react";
+import { Button, notification, Select, Space } from "antd";
+import { useNavigate } from "react-router-dom";
 
-const SidebarContainer = styled.div`
-  width: 280px;
-  height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 24px 0;
-  overflow-y: auto;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-`;
+import Typography from "../components/common/Typography";
+import DropDownTitle from "../components/common/DropDownTitle";
+// import { usePermissions } from "hooks/permissions";
+import {
+  ActiveIcon,
+  CallCenterUnfilledIcon,
+  ChevronBottomIcon,
+  ContactsIcon,
+  DataPhoneIcon,
+  InActiveIcon,
+  LiveCallsUnfilledIcon,
+  LockUnfilledIcon,
+  PbxPortalIcon,
+  ReportIcon,
+  SmsIcon,
+} from "../assets";
 
-const SidebarHeader = styled.div`
-  padding: 0 24px 24px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 24px;
-`;
+import "./sidebar.scss";
+// import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+// import { RootState } from "../../../redux/store";
+// import { setAccountId } from "../../../redux/slices/api.slice";
+// import { setSessionData } from "../../../redux/slices/session.slice";
 
-const Logo = styled.h1`
-  margin: 0;
-  font-size: 24px;
-  font-weight: 700;
-  color: white;
-`;
+// ---------------- Types ----------------
+type MenuItem = {
+  key: string;
+  icon?: ReactNode;
+  label: string | ReactNode;
+  path?: string;
+  className?: string;
+  onClick?: () => void;
+  children?: MenuItem[];
+};
 
-const Subtitle = styled.p`
-  margin: 8px 0 0;
-  font-size: 14px;
-  opacity: 0.8;
-`;
-
-const MenuSection = styled.div`
-  margin-bottom: 8px;
-`;
-
-const MenuHeader = styled.div<{ isOpen: boolean }>`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 24px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border-radius: 8px;
-  margin: 0 16px;
-  background: ${props => props.isOpen ? 'rgba(255, 255, 255, 0.1)' : 'transparent'};
-  
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-`;
-
-const MenuTitle = styled.div`
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-  font-size: 14px;
-`;
-
-const MenuIcon = styled.div`
-  margin-right: 12px;
-  font-size: 18px;
-`;
-
-const ChevronIcon = styled.span<{ isOpen: boolean }>`
-  transition: transform 0.2s ease;
-  transform: rotate(${props => props.isOpen ? '90deg' : '0deg'});
-  font-size: 12px;
-`;
-
-const MenuContent = styled.div<{ isOpen: boolean }>`
-  max-height: ${props => props.isOpen ? '500px' : '0'};
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  margin-top: 8px;
-`;
-
-const MenuItem = styled(Link)<{ isActive: boolean }>`
-  display: block;
-  padding: 8px 24px 8px 48px;
-  color: ${props => props.isActive ? 'white' : 'rgba(255, 255, 255, 0.8)'};
-  text-decoration: none;
-  font-size: 13px;
-  transition: all 0.2s ease;
-  border-left: ${props => props.isActive ? '3px solid #fff' : 'none'};
-  background: ${props => props.isActive ? 'rgba(255, 255, 255, 0.15)' : 'transparent'};
-  
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-  }
-`;
-
-interface MenuData {
-  title: string;
-  icon: string;
-  items: Array<{
-    label: string;
-    path: string;
-  }>;
+interface FlatOption {
+  value: string;
+  label: string;
+}
+interface GroupOption {
+  label: string;
+  options: FlatOption[];
+}
+interface Account {
+  id: string;
+  name: string;
+  parent_id: string;
 }
 
-const menuData: MenuData[] = [
-  {
-    title: 'Dashboard',
-    icon: '📊',
-    items: [
-      { label: 'Overview', path: '/dashboard/overview' },
-      { label: 'Statistics', path: '/dashboard/statistics' },
-      { label: 'Reports', path: '/dashboard/reports' }
-    ]
-  },
-  {
-    title: 'Products',
-    icon: '📦',
-    items: [
-      { label: 'Product List', path: '/products/list' },
-      { label: 'Categories', path: '/products/categories' },
-      { label: 'Inventory', path: '/products/inventory' },
-      { label: 'Add Product', path: '/products/add' }
-    ]
-  },
-  {
-    title: 'Analytics',
-    icon: '📈',
-    items: [
-      { label: 'Sales Analytics', path: '/analytics/sales' },
-      { label: 'User Analytics', path: '/analytics/users' },
-      { label: 'Performance', path: '/analytics/performance' }
-    ]
-  },
-  {
-    title: 'Settings',
-    icon: '⚙️',
-    items: [
-      { label: 'General', path: '/settings/general' },
-      { label: 'Users', path: '/settings/users' },
-      { label: 'Security', path: '/settings/security' },
-      { label: 'Integrations', path: '/settings/integrations' }
-    ]
-  }
-];
+type AccountOptions = GroupOption[];
 
-const Sidebar: React.FC = () => {
-  const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({
-    Dashboard: true,
-    Products: false,
-    Analytics: false,
-    Settings: false
-  });
-  const location = useLocation();
+const SubMenuItemLabel: React.FC<{ label: string; icon: React.ReactNode }> = ({
+  label,
+}) => <span>{label}</span>;
 
-  const toggleMenu = (menuTitle: string) => {
-    setOpenMenus(prev => ({
-      ...prev,
-      [menuTitle]: !prev[menuTitle]
-    }));
-  };
+// ---------------- Component ----------------
+const SideBar = ({
+  appMenu = [],
+  appName,
+  permissions,
+  accounts = [],
+  userAccount,
+  setSelectedAccountId,
+  selectedAccountId,
+}: {
+  appMenu: {
+    key: string;
+    label: string;
+    icon: React.ReactNode;
+    path: string;
+  }[];
+  appName: string;
+  permissions: { [key: string]: string[] };
+  accounts: Account[];
+  userAccount: string;
+  setSelectedAccountId: React.Dispatch<SetStateAction<string | null>>;
+  selectedAccountId: string;
+}) => {
+  const [selectedTab, setSelectedTab] = useState<string>(appName);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [firstLoad, setFirstLoad] = useState(true);
+  const [openKey, setOpenKey] = useState<string | null>(null);
 
-  const isMenuItemActive = (path: string) => {
-    return location.pathname === path;
-  };
+  const navigate = useNavigate();
 
+  // const [cookies, setCookie] = useCookies<"last_account_id">([
+
+  const accountOptions = useMemo(() => {
+    const parents = accounts.filter((a) => a.parent_id === null);
+
+    return parents.map((parent) => {
+      const subs = accounts.filter((a) => a.parent_id === parent.id);
+      if (subs.length > 0) {
+        return {
+          label: parent.name,
+          options: [
+            { value: parent.id, label: parent.name },
+            ...subs.map((sub) => ({ value: sub.id, label: sub.name })),
+          ],
+        };
+      }
+      return { value: parent.id, label: parent.name };
+    });
+  }, [accounts]) as AccountOptions;
+
+  const subMenu = useMemo(() => {
+    return appMenu.map((item) => {
+      const isActive = item.path === window.location.pathname;
+      return {
+        key: item.key,
+        icon: (
+          <img
+            src={isActive ? ActiveIcon : InActiveIcon}
+            alt={isActive ? "active" : "inactive"}
+          />
+        ),
+        label: (
+          <SubMenuItemLabel
+            label={item.label}
+            icon={<img src={isActive ? ActiveIcon : InActiveIcon} alt="" />}
+          />
+        ),
+        className: `custom-submenu-item ${isActive ? "menuItemSelected" : ""}`,
+        onClick: () => navigate(item.path),
+      };
+    });
+  }, [appMenu, navigate]);
+
+  const menuItems: MenuItem[] = useMemo(() => {
+    return [
+      {
+        key: "live-calls",
+        icon: LiveCallsUnfilledIcon,
+        label: "Live Calls",
+        path: "/",
+      },
+      {
+        key: "call-center",
+        icon: CallCenterUnfilledIcon,
+        label: "Call Center",
+        path: "/call-center",
+      },
+      {
+        key: "sms",
+        icon: SmsIcon,
+        label: "SMS",
+        path: import.meta.env.VITE_SMS_URL || "#",
+      },
+      {
+        key: "contacts",
+        icon: ContactsIcon,
+        label: "Contacts",
+        path: import.meta.env.VITE_CONTACTS_URL || "#",
+      },
+      {
+        key: "pbx-portal",
+        icon: PbxPortalIcon,
+        label: "PBX Portal",
+        path: "#",
+      },
+      {
+        key: "reports",
+        icon: ReportIcon,
+        label: "Report",
+        path: import.meta.env.VITE_REPORTS_URL || "#",
+      },
+    ].map((item) => {
+      // const permissionKey = getPermissionKey(item.key);
+      // const isPermitted = !!permissions[permissionKey]?.length;
+      // const hasSubMenu =
+      //   ["reports", "sms", "contacts"].includes(item.key) && subMenu;
+
+      return {
+        ...item,
+        disabled: true,
+        icon: (
+          <span className="icon-wrapper">
+            <img src={item.icon} alt={`${item.label}`} height={22} width={22} />
+          </span>
+        ),
+        label: (
+          <span className="menu-label-wrapper">
+            <span className="menu-label">{item.label}</span>
+            {true && (
+              <img src={LockUnfilledIcon} className="lock-icon" alt="lock" />
+            )}
+          </span>
+        ),
+        className: `custom-submenu-item ${
+          item.path === window.location.pathname ? "menuItemSelected" : ""
+        }`,
+        onClick: true
+          ? () => (window.location.href = item.path)
+          : undefined,
+        children: undefined,
+      };
+    });
+  }, [permissions, subMenu]);
+
+  // ---------------- Render ----------------
   return (
-    <SidebarContainer>
-      <SidebarHeader>
-        <Logo>Micro Frontends</Logo>
-        <Subtitle>Enterprise Dashboard</Subtitle>
-      </SidebarHeader>
-      
-      {menuData.map((menu) => (
-        <MenuSection key={menu.title}>
-          <MenuHeader 
-            isOpen={openMenus[menu.title]} 
-            onClick={() => toggleMenu(menu.title)}
-          >
-            <MenuTitle>
-              <MenuIcon>{menu.icon}</MenuIcon>
-              {menu.title}
-            </MenuTitle>
-            <ChevronIcon isOpen={openMenus[menu.title]}>▶</ChevronIcon>
-          </MenuHeader>
-          <MenuContent isOpen={openMenus[menu.title]}>
-            {menu.items.map((item) => (
-              <MenuItem
-                key={item.path}
-                to={item.path}
-                isActive={isMenuItemActive(item.path)}
-              >
-                {item.label}
-              </MenuItem>
-            ))}
-          </MenuContent>
-        </MenuSection>
-      ))}
-    </SidebarContainer>
+    <>
+      <div
+        className={`hamburger-icon ${isSidebarOpen ? "shift-left" : ""}`}
+        aria-label="Toggle sidebar menu"
+        role="button"
+        tabIndex={0}
+        onClick={() => setIsCollapsed((prev) => !prev)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setIsCollapsed((prev) => !prev);
+          }
+        }}
+      >
+        <i className="bx bx-menu" aria-hidden="true" />
+      </div>
+
+      {isSidebarOpen && (
+        <div className="overlay"  aria-hidden="true" />
+      )}
+
+      <nav
+        className={`sidebar-container${isSidebarOpen ? " open" : ""}${isCollapsed ? " collapsed" : ""}`}
+        aria-label="Sidebar navigation"
+      >
+        <div className="sidebar-logo">
+          <div className="logo">
+            <img src={DataPhoneIcon} alt="DataPhone" style={{ width: isCollapsed ? 32 : '100%', height: isCollapsed ? 32 : '100%' }} />
+          </div>
+        </div>
+
+        <div className="sidebar-items">
+          <div className="top-items-container">
+            <div className="top-items-2">
+              {!isCollapsed && (
+                <Typography variant="small-heading-4" className="heading-text">
+                  Applications
+                </Typography>
+              )}
+              <ul>
+                {menuItems.map((item) => {
+                  const isOpen = openKey === item.key;
+                  const hasChildren = !!item.children;
+
+                  const handleItemClick = () => {
+                    setOpenKey((prev) => (prev === item.key ? null : item.key));
+                    item.onClick?.();
+                  };
+
+                  return (
+                    <React.Fragment key={item.key}>
+                      <li
+                        className={`$${
+                          selectedTab === item.key ? "active selected" : ""
+                        } ${!item.onClick ? "disabled" : ""}`}
+                        onClick={handleItemClick}
+                        aria-current={
+                          selectedTab === item.key ? "page" : undefined
+                        }
+                        aria-label={`Select $${
+                          typeof item.label === "string" ? item.label : item.key
+                        }`}
+                        role="button"
+                        tabIndex={0}
+                      >
+                        {item.icon}
+                        {!isCollapsed && (
+                          <Typography
+                            variant="body-text-2"
+                            className="label-icon"
+                          >
+                            {item.label}
+                            {hasChildren && (
+                              <img
+                                src={ChevronBottomIcon}
+                                alt="chevron-down-icon"
+                              />
+                            )}
+                          </Typography>
+                        )}
+                      </li>
+
+                      {Array.isArray(item.children) &&
+                        item.children.length > 0 && !isCollapsed && (
+                          <ul
+                            className={`submenu ${isOpen ? "open" : "closed"}`}
+                          >
+                            {item.children.map((child) => (
+                              <li
+                                key={child.key}
+                                onClick={child.onClick}
+                                className={child.className}
+                                role="button"
+                                tabIndex={0}
+                              >
+                                {child.icon}
+                                <Typography variant="body-text-2">
+                                  {child.label}
+                                </Typography>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                    </React.Fragment>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+
+          {!isCollapsed && (
+            <div className="bottom-items">
+              <Select<string, GroupOption>
+                className="accountSelect"
+                placeholder="Select Account"
+                options={accountOptions}
+                showSearch
+                filterOption={(input, opt) =>
+                  (opt?.label ?? "").toLowerCase().includes(input.toLowerCase())
+                }
+                labelRender={(value: any) => (
+                  <DropDownTitle
+                    label="Accounts"
+                    value={value.label || "Select Account"}
+                  />
+                )}
+              />
+            </div>
+          )}
+        </div>
+      </nav>
+    </>
   );
 };
 
-export default Sidebar;
-
+export default SideBar;
