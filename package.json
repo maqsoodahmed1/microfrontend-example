@@ -8,15 +8,11 @@
   "scripts": {
     "dev": "npm run build:remotes && concurrently \"npm run serve:remotes\" \"npm run dev:parent\"",
     "dev:parent": "cd apps/parent && npm run dev",
-    "build:remotes": "npm run build:dashboard && npm run build:products && npm run build:analytics && npm run build:settings",
-    "serve:remotes": "concurrently \"npm run serve:dashboard\" \"npm run serve:products\" \"npm run serve:analytics\" \"npm run serve:settings\"",
+    "build:remotes": "npm run build:dashboard && npm run build:settings",
+    "serve:remotes": "concurrently \"npm run serve:dashboard\" \"npm run serve:settings\"",
     "build:dashboard": "cd apps/dashboard && npm run build",
-    "build:products": "cd apps/products && npm run build",
-    "build:analytics": "cd apps/analytics && npm run build",
     "build:settings": "cd apps/settings && npm run build",
     "serve:dashboard": "cd apps/dashboard && npm run preview",
-    "serve:products": "cd apps/products && npm run preview",
-    "serve:analytics": "cd apps/analytics && npm run preview",
     "serve:settings": "cd apps/settings && npm run preview",
     "build": "npm run build:remotes && cd apps/parent && npm run build"
   },

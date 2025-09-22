@@ -9,15 +9,6 @@ const DashboardOverview = lazy(() => import('dashboard/Overview'));
 const DashboardStatistics = lazy(() => import('dashboard/Statistics'));
 const DashboardReports = lazy(() => import('dashboard/Reports'));
 
-const ProductsList = lazy(() => import('products/ProductsList'));
-const ProductsCategories = lazy(() => import('products/Categories'));
-const ProductsInventory = lazy(() => import('products/Inventory'));
-const ProductsAdd = lazy(() => import('products/AddProduct'));
-
-const AnalyticsSales = lazy(() => import('analytics/Sales'));
-const AnalyticsUsers = lazy(() => import('analytics/Users'));
-const AnalyticsPerformance = lazy(() => import('analytics/Performance'));
-
 const SettingsGeneral = lazy(() => import('settings/General'));
 const SettingsUsers = lazy(() => import('settings/Users'));
 const SettingsSecurity = lazy(() => import('settings/Security'));
@@ -106,17 +97,7 @@ const App: React.FC = () => {
               <Route path="/dashboard/statistics" element={<DashboardStatistics />} />
               <Route path="/dashboard/reports" element={<DashboardReports />} />
               
-              {/* Products routes */}
-              <Route path="/products/list" element={<ProductsList />} />
-              <Route path="/products/categories" element={<ProductsCategories />} />
-              <Route path="/products/inventory" element={<ProductsInventory />} />
-              <Route path="/products/add" element={<ProductsAdd />} />
-              
-              {/* Analytics routes */}
-              <Route path="/analytics/sales" element={<AnalyticsSales />} />
-              <Route path="/analytics/users" element={<AnalyticsUsers />} />
-              <Route path="/analytics/performance" element={<AnalyticsPerformance />} />
-              
+  
               {/* Settings routes */}
               <Route path="/settings/general" element={<SettingsGeneral />} />
               <Route path="/settings/users" element={<SettingsUsers />} />

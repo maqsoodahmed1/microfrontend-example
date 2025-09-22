@@ -116,25 +116,6 @@ const menuData: MenuData[] = [
     ]
   },
   {
-    title: 'Products',
-    icon: '📦',
-    items: [
-      { label: 'Product List', path: '/products/list' },
-      { label: 'Categories', path: '/products/categories' },
-      { label: 'Inventory', path: '/products/inventory' },
-      { label: 'Add Product', path: '/products/add' }
-    ]
-  },
-  {
-    title: 'Analytics',
-    icon: '📈',
-    items: [
-      { label: 'Sales Analytics', path: '/analytics/sales' },
-      { label: 'User Analytics', path: '/analytics/users' },
-      { label: 'Performance', path: '/analytics/performance' }
-    ]
-  },
-  {
     title: 'Settings',
     icon: '⚙️',
     items: [
