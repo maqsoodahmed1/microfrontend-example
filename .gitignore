@@ -2,6 +2,13 @@
 /node_modules
 # make node_modules in specific workspace packages
 /packages/*/node_modules
+/apps/*/node_modules
+/apps/*/dist
+/apps/*/build
+/apps/*/coverage
+/apps/*/lib
+/apps/*/esm
+/apps/*/cjs
 /packages/*/dist
 /packages/*/build
 /packages/*/coverage
@@ -12,5 +19,5 @@
 # make log files
 *.log
 
-env include also
+# env include also
 .env
