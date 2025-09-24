@@ -1,28 +1,46 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
 
-export default defineConfig({
-  plugins: [
-    react(),
-    federation({
-      name: 'parent',
-      remotes: {
-        dashboard: 'http://localhost:4001/assets/remoteEntry.js',
-        products: 'http://localhost:4002/assets/remoteEntry.js',
-        analytics: 'http://localhost:4003/assets/remoteEntry.js',
-        settings: 'http://localhost:4004/assets/remoteEntry.js'
-      },
-      shared: ['react', 'react-dom']
-    })
-  ],
-  build: {
-    target: 'esnext',
-    modulePreload: false,
-    cssCodeSplit: false,
-    minify: false
-  },
-  server: {
-    port: 3000
-  }
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+  
+  return {
+    base: '/',
+    plugins: [
+      react(),
+      federation({
+        name: 'parent',
+        exposes: {
+          './SharedStore': './src/sharedStore',
+          './UserCard': './src/components/shared/UserCard',
+          './StatsCard': './src/components/shared/StatsCard',
+          './DataTable': './src/components/shared/DataTable',
+          './SharedButton': './src/components/shared/SharedButton',
+          './utils': './src/utils/index'
+        },
+        remotes: {
+          sms: 'https://test-microfrontend.dev.dataphone.cloud/sms/assets/remoteEntry.js',
+          reports: 'https://test-microfrontend.dev.dataphone.cloud/reports/assets/remoteEntry.js'
+        },
+        shared: ['react', 'react-dom', 'react-redux', '@reduxjs/toolkit']
+      })
+    ],
+    build: {
+      target: 'esnext',
+      modulePreload: false,
+      cssCodeSplit: false,
+      minify: false
+    },
+    server: {
+      port: 3000,
+      host: true,
+      allowedHosts: ["test-microfrontend.dev.dataphone.cloud"]
+    },
+    preview: {
+      port: 4173,
+      host: true,
+      allowedHosts: ["test-microfrontend.dev.dataphone.cloud"]
+    }
+  };
 });

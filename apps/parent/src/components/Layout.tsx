@@ -1,9 +1,11 @@
 import React from 'react';
-import { Layout as AntLayout, Typography, Breadcrumb } from 'antd';
+import { Layout as AntLayout, Typography, Breadcrumb, Button, Space, Avatar, Dropdown } from 'antd';
 import { useLocation } from 'react-router-dom';
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import Sidebar from './Sidebar';
+import { useAuth } from '../contexts/AuthContext';
 
-const { Content } = AntLayout;
+const { Content, Header } = AntLayout;
 const { Title, Text } = Typography;
 
 interface LayoutProps {
@@ -14,6 +16,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, title, description }) => {
   const location = useLocation();
+  const { user, logout } = useAuth();
   
   // Generate breadcrumb from path
   const pathSnippets = location.pathname.split('/').filter(i => i);
@@ -34,10 +37,39 @@ const Layout: React.FC<LayoutProps> = ({ children, title, description }) => {
     };
   });
 
+  const userMenuItems = [
+    {
+      key: 'logout',
+      label: 'Logout',
+      icon: <LogoutOutlined />,
+      onClick: logout
+    }
+  ];
+
   return (
     <AntLayout style={{ minHeight: '100vh', background: '#f5f5f5' }}>
-      <Sidebar />
-      <AntLayout style={{ marginLeft: 280 }}>
+      {user && <Sidebar />}
+      <AntLayout style={{ marginLeft: user ? 280 : 0 }}>
+        {user && (
+          <Header style={{ 
+            background: 'white', 
+            padding: '0 24px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+            display: 'flex',
+            justifyContent: 'flex-end',
+            alignItems: 'center'
+          }}>
+            <Space>
+              <Text>Welcome, {user.name}</Text>
+              <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
+                <Avatar 
+                  icon={<UserOutlined />} 
+                  style={{ cursor: 'pointer', backgroundColor: '#667eea' }}
+                />
+              </Dropdown>
+            </Space>
+          </Header>
+        )}
         <Content style={{ 
           padding: '24px',
           background: '#f5f5f5',
@@ -52,7 +84,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title, description }) => {
             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
           }}>
             {/* Breadcrumb */}
-            {pathSnippets.length > 0 && (
+            {user && pathSnippets.length > 0 && (
               <Breadcrumb 
                 style={{ marginBottom: '16px' }}
                 items={[

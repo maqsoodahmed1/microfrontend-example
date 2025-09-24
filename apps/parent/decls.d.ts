@@ -1,19 +1,9 @@
-declare module 'dashboard/*' {
+declare module 'sms/*' {
   const Component: any;
   export default Component;
 }
 
-declare module 'products/*' {
-  const Component: any;
-  export default Component;
-}
-
-declare module 'analytics/*' {
-  const Component: any;
-  export default Component;
-}
-
-declare module 'settings/*' {
+declare module 'reports/*' {
   const Component: any;
   export default Component;
 }

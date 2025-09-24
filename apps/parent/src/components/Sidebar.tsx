@@ -107,51 +107,38 @@ interface MenuData {
 
 const menuData: MenuData[] = [
   {
-    title: 'Dashboard',
-    icon: '📊',
+    title: 'SMS',
+    icon: '�',
     items: [
-      { label: 'Overview', path: '/dashboard/overview' },
-      { label: 'Statistics', path: '/dashboard/statistics' },
-      { label: 'Reports', path: '/dashboard/reports' }
+      { label: 'Page 1', path: '/sms/page1' },
+      { label: 'Page 2', path: '/sms/page2' },
+      { label: 'Page 3', path: '/sms/page3' }
     ]
   },
   {
-    title: 'Products',
-    icon: '📦',
+    title: 'Reports',
+    icon: '�',
     items: [
-      { label: 'Product List', path: '/products/list' },
-      { label: 'Categories', path: '/products/categories' },
-      { label: 'Inventory', path: '/products/inventory' },
-      { label: 'Add Product', path: '/products/add' }
+      { label: 'Page 1', path: '/reports/page1' },
+      { label: 'Page 2', path: '/reports/page2' },
+      { label: 'Page 3', path: '/reports/page3' }
     ]
   },
   {
-    title: 'Analytics',
-    icon: '📈',
+    title: 'Shared State Demo',
+    icon: '🔗',
     items: [
-      { label: 'Sales Analytics', path: '/analytics/sales' },
-      { label: 'User Analytics', path: '/analytics/users' },
-      { label: 'Performance', path: '/analytics/performance' }
-    ]
-  },
-  {
-    title: 'Settings',
-    icon: '⚙️',
-    items: [
-      { label: 'General', path: '/settings/general' },
-      { label: 'Users', path: '/settings/users' },
-      { label: 'Security', path: '/settings/security' },
-      { label: 'Integrations', path: '/settings/integrations' }
+      { label: 'User Management', path: '/user-demo' },
+      { label: 'Shared Components', path: '/shared-info' }
     ]
   }
 ];
 
 const Sidebar: React.FC = () => {
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({
-    Dashboard: true,
-    Products: false,
-    Analytics: false,
-    Settings: false
+    SMS: true,
+    Reports: false,
+    'Shared State Demo': false
   });
   const location = useLocation();
 

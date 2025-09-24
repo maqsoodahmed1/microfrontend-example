@@ -1,39 +1,42 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ConfigProvider, Spin, Alert } from 'antd';
+import { Provider } from 'react-redux';
 import Layout from './components/Layout';
+import LoginPage from './components/LoginPage';
+import ProtectedRoute from './components/ProtectedRoute';
+import { AuthProvider } from './contexts/AuthContext';
+import { initializeSharedStore, store } from './sharedStore';
 import 'antd/dist/reset.css';
 
-// Lazy load remote components
-const DashboardOverview = lazy(() => import('dashboard/Overview'));
-const DashboardStatistics = lazy(() => import('dashboard/Statistics'));
-const DashboardReports = lazy(() => import('dashboard/Reports'));
+// Local components
+import UserManager from './components/UserManager';
+import SharedComponentsInfo from './components/SharedComponentsInfo';
+import HomePage from './components/HomePage';
 
-const ProductsList = lazy(() => import('products/ProductsList'));
-const ProductsCategories = lazy(() => import('products/Categories'));
-const ProductsInventory = lazy(() => import('products/Inventory'));
-const ProductsAdd = lazy(() => import('products/AddProduct'));
-
-const AnalyticsSales = lazy(() => import('analytics/Sales'));
-const AnalyticsUsers = lazy(() => import('analytics/Users'));
-const AnalyticsPerformance = lazy(() => import('analytics/Performance'));
-
-const SettingsGeneral = lazy(() => import('settings/General'));
-const SettingsUsers = lazy(() => import('settings/Users'));
-const SettingsSecurity = lazy(() => import('settings/Security'));
-const SettingsIntegrations = lazy(() => import('settings/Integrations'));
-
-// Loading component
-const Loading: React.FC = () => (
+// Inline loading component for page transitions
+const PageLoading: React.FC = () => (
   <div style={{ 
     display: 'flex', 
     justifyContent: 'center', 
     alignItems: 'center', 
-    height: '200px' 
+    height: '200px',
+    flexDirection: 'column',
+    gap: '16px'
   }}>
-    <Spin size="large" tip="Loading micro-frontend..." />
+    <Spin size="large" />
+    <span style={{ color: '#666' }}>Loading page...</span>
   </div>
 );
+
+// Lazy load remote components
+const SmsPage1 = lazy(() => import('sms/Page1'));
+const SmsPage2 = lazy(() => import('sms/Page2'));
+const SmsPage3 = lazy(() => import('sms/Page3'));
+
+const ReportsPage1 = lazy(() => import('reports/Page1'));
+const ReportsPage2 = lazy(() => import('reports/Page2'));
+const ReportsPage3 = lazy(() => import('reports/Page3'));
 
 // Error boundary component
 class ErrorBoundary extends React.Component<
@@ -84,60 +87,95 @@ class ErrorBoundary extends React.Component<
 }
 
 const App: React.FC = () => {
+  useEffect(() => {
+    // Initialize shared store on app startup
+    initializeSharedStore();
+  }, []);
+
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: '#667eea',
-          borderRadius: 8,
-          colorBgContainer: '#ffffff',
-        },
-      }}
-    >
-      <Layout>
-        <ErrorBoundary>
-          <Suspense fallback={<Loading />}>
+    <Provider store={store}>
+      <AuthProvider>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: '#667eea',
+              borderRadius: 8,
+              colorBgContainer: '#ffffff',
+            },
+          }}
+        >
+          <ErrorBoundary>
             <Routes>
-              {/* Default redirect */}
-              <Route path="/" element={<Navigate to="/dashboard/overview" replace />} />
+              {/* Public route */}
+              <Route path="/login" element={<LoginPage />} />
               
-              {/* Dashboard routes */}
-              <Route path="/dashboard/overview" element={<DashboardOverview />} />
-              <Route path="/dashboard/statistics" element={<DashboardStatistics />} />
-              <Route path="/dashboard/reports" element={<DashboardReports />} />
-              
-              {/* Products routes */}
-              <Route path="/products/list" element={<ProductsList />} />
-              <Route path="/products/categories" element={<ProductsCategories />} />
-              <Route path="/products/inventory" element={<ProductsInventory />} />
-              <Route path="/products/add" element={<ProductsAdd />} />
-              
-              {/* Analytics routes */}
-              <Route path="/analytics/sales" element={<AnalyticsSales />} />
-              <Route path="/analytics/users" element={<AnalyticsUsers />} />
-              <Route path="/analytics/performance" element={<AnalyticsPerformance />} />
-              
-              {/* Settings routes */}
-              <Route path="/settings/general" element={<SettingsGeneral />} />
-              <Route path="/settings/users" element={<SettingsUsers />} />
-              <Route path="/settings/security" element={<SettingsSecurity />} />
-              <Route path="/settings/integrations" element={<SettingsIntegrations />} />
-              
-              {/* Catch all */}
-              <Route path="*" element={
-                <Alert
-                  message="Page Not Found"
-                  description="The page you're looking for doesn't exist."
-                  type="warning"
-                  showIcon
-                  style={{ textAlign: 'center', margin: '48px 0' }}
-                />
+              {/* Protected routes */}
+              <Route path="/*" element={
+                <ProtectedRoute>
+                  <Layout>
+                    <Routes>
+                      {/* Home page at root */}
+                      <Route path="/" element={<HomePage />} />
+                      
+                      {/* User Management Demo */}
+                      <Route path="/user-demo" element={<UserManager />} />
+                      
+                      {/* Shared Components Info */}
+                      <Route path="/shared-info" element={<SharedComponentsInfo />} />
+                      
+                      {/* SMS routes */}
+                      <Route path="/sms/page1" element={
+                        <Suspense fallback={<PageLoading />}>
+                          <SmsPage1 />
+                        </Suspense>
+                      } />
+                      <Route path="/sms/page2" element={
+                        <Suspense fallback={<PageLoading />}>
+                          <SmsPage2 />
+                        </Suspense>
+                      } />
+                      <Route path="/sms/page3" element={
+                        <Suspense fallback={<PageLoading />}>
+                          <SmsPage3 />
+                        </Suspense>
+                      } />
+                      
+                      {/* Reports routes */}
+                      <Route path="/reports/page1" element={
+                        <Suspense fallback={<PageLoading />}>
+                          <ReportsPage1 />
+                        </Suspense>
+                      } />
+                      <Route path="/reports/page2" element={
+                        <Suspense fallback={<PageLoading />}>
+                          <ReportsPage2 />
+                        </Suspense>
+                      } />
+                      <Route path="/reports/page3" element={
+                        <Suspense fallback={<PageLoading />}>
+                          <ReportsPage3 />
+                        </Suspense>
+                      } />
+                      
+                      {/* Catch all */}
+                      <Route path="*" element={
+                        <Alert
+                          message="Page Not Found"
+                          description="The page you're looking for doesn't exist."
+                          type="warning"
+                          showIcon
+                          style={{ textAlign: 'center', margin: '48px 0' }}
+                        />
+                      } />
+                    </Routes>
+                  </Layout>
+                </ProtectedRoute>
               } />
             </Routes>
-          </Suspense>
-        </ErrorBoundary>
-      </Layout>
-    </ConfigProvider>
+          </ErrorBoundary>
+        </ConfigProvider>
+      </AuthProvider>
+    </Provider>
   );
 };
 

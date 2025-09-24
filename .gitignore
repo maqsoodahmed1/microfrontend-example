@@ -1,0 +1,16 @@
+
+/node_modules
+# make node_modules in specific workspace packages
+/packages/*/node_modules
+/packages/*/dist
+/packages/*/build
+/packages/*/coverage
+/packages/*/lib
+/packages/*/esm
+/packages/*/cjs
+/packages/*/tsconfig.tsbuildinfo
+# make log files
+*.log
+
+env include also
+.env
