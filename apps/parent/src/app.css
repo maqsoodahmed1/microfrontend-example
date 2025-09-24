@@ -7,10 +7,15 @@ html {
 @theme {
     --color-primary: #803ee5;
     --color-dp-gray: #7d94bd;
+    --color-off-white: #f8f8f8;
     --color-dp-gray-semi: #96A5B8;
     --color-dp-gray-blue: #4D5E80;
+    --color-dp-gray-light: #edeff2;
     --color-dp-ice-blue: #CDE6F8;
     --color-dp-lime-green: #08deba;
+    --color-dp-dark-green: #0bb783;
+    --color-dp-purplev2: #4a4def;
+    --color-dp-red: #ff0000;
     --breakpoint-3xl: 107.5rem;
     --breakpoint-4xl: 120rem;   
     --font-mona: "Mona Sans", sans-serif !important;

@@ -12,8 +12,14 @@ import ArrowDownThin from "./arrow-down-thin.svg?react"
 import SortIconAsc from "./sort-icon-asc.svg?react"
 import SortIconDsc from "./sort-icon-dsc.svg?react"
 import SortIcon from "./sort-icon.svg?react"
+import ReportIconLeft from "./report-icon-left-arrow.svg?react"
+import ReportIconRight from "./report-icon-right-arrow.svg?react"
+import ReportIconWarn from "./report-icon-warn.svg?react"
 
 export {
+    ReportIconLeft,
+    ReportIconRight,
+    ReportIconWarn,
     SortIconAsc,
     SortIconDsc,
     SortIcon,
