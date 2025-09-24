@@ -17,6 +17,6 @@
     "build": "npm run build:remotes && cd apps/parent && npm run build"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "8.2.2"
   }
 }

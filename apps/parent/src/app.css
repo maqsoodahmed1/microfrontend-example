@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+html {
+    font-size: 100%;
+}
+
+@theme {
+    --color-primary: #803ee5;
+    --color-dp-gray: #7d94bd;
+    --color-dp-gray-semi: #96A5B8;
+    --color-dp-gray-dark: #444a6d;
+    --color-dp-ice-blue: #CDE6F8;
+    --breakpoint-3xl: 107.5rem;
+    --breakpoint-4xl: 120rem;   
+    --font-mona: "Mona Sans", sans-serif !important
+}
+
+.ant-menu .ant-menu-item-selected .ant-menu-item-icon {
+    color: var(--color-primary) !important;
+    fill: var(--color-primary) !important;
+  }
+  
+ .ant-layout-sider-collapsed .ant-layout-sider-zero-width-trigger {
+    inset-inline-end: -30px;
+    rotate: 180deg;
+  }
+
+  .ant-layout-sider-zero-width-trigger {
+    position: absolute;
+    inset-inline-end: -6px;
+    cursor: pointer;
+    top: 90px !important;
+    background-color: transparent !important;
+  }
+
+  .sidebar-menu {
+    @apply z-[1001] h-screen pb-1;
+  
+    /* font family */
+    @apply [&_*]:!font-mona;
+  
+    /* general item styling */
+    @apply [&_.ant-menu-item]:!text-dp-gray;
+    @apply [&_.ant-menu-item-icon]:flex [&_.ant-menu-item-icon]:!w-8 [&_.ant-menu-item-icon]:justify-center;
+  
+    /* selected item styling */
+    @apply [&_.ant-menu-item-selected]:!text-primary [&_.ant-menu-item-selected]:!border-0 [&_.ant-menu-item-selected]:!bg-primary/10 [&_.ant-menu-item-selected]:!font-semibold;
+    @apply [&_.ant-menu-item-selected_.child-bullet]:!text-primary;
+  
+    /* submenu styling */
+    @apply [&_.ant-menu-submenu-selected>.ant-menu-submenu-title]:!bg-primary/10;
+    @apply [&_.ant-menu-submenu-selected_.ant-menu-submenu-title]:!border-l-3;
+    @apply [&_.ant-menu-submenu-children_.ant-menu-item-selected]:!text-primary [&_.ant-menu-submenu-children_.ant-menu-item-selected]:!bg-[rgba(255,255,255,0.1)];
+    @apply [&_.ant-menu-submenu-children_.ant-menu-item-selected_svg]:!text-primary;
+    @apply [&_.ant-menu-submenu-selected_.ant-menu-submenu-title]:!text-primary [&_.ant-menu-submenu-selected_.ant-menu-submenu-title_svg]:!text-primary;
+  
+    /* submenu base + hover */
+    @apply [&_.ant-menu-submenu_.ant-menu-submenu-title]:!text-dp-gray;
+    @apply [&_.ant-menu-submenu_.ant-menu-submenu-title:hover]:!text-primary;
+    @apply [&_.ant-menu-submenu_.ant-menu-item-only-child]:!bg-transparent [&_.ant-menu-submenu_.ant-menu-item-only-child]:hover:!bg-primary/5;
+  }

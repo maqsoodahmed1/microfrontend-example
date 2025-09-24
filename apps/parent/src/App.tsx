@@ -13,6 +13,7 @@ import 'antd/dist/reset.css';
 import UserManager from './components/UserManager';
 import SharedComponentsInfo from './components/SharedComponentsInfo';
 import HomePage from './components/HomePage';
+import { COLORS, getColorIntensity } from './constants/colors.constants';
 
 // Inline loading component for page transitions
 const PageLoading: React.FC = () => (
@@ -97,10 +98,28 @@ const App: React.FC = () => {
       <AuthProvider>
         <ConfigProvider
           theme={{
+            components: {
+              Select: {
+                controlHeight: 53,
+                colorText: COLORS.DP_GRAY_DARK,
+                borderRadius: 11,
+                colorBorder: COLORS.DP_ICE_BLUE,
+                hoverBorderColor: getColorIntensity(COLORS.PRIMARY, 0.55),
+                activeBorderColor: getColorIntensity(COLORS.PRIMARY, 0.55),
+                colorTextPlaceholder: COLORS.DP_GRAY_SEMI,
+                // colorBgContainer: COLORS.ACCENT_LIGHT,
+                // optionSelectedBg: COLORS.ACCENT_LIGHT,
+                // optionSelectedColor: COLORS.OFF_WHITE,
+                optionHeight: 20,
+                optionPadding: 10,
+                // colorBgElevated: COLORS.SECONDARY_DARK_V2,
+              },
+            },
             token: {
-              colorPrimary: '#667eea',
-              borderRadius: 8,
-              colorBgContainer: '#ffffff',
+              colorPrimary: COLORS.PRIMARY,
+              colorInfo: COLORS.PRIMARY,
+              borderRadius: 12,
+              // colorBgContainer: '#ffffff',
             },
           }}
         >
