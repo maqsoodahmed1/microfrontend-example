@@ -8,11 +8,13 @@ html {
     --color-primary: #803ee5;
     --color-dp-gray: #7d94bd;
     --color-dp-gray-semi: #96A5B8;
-    --color-dp-gray-dark: #444a6d;
+    --color-dp-gray-blue: #4D5E80;
     --color-dp-ice-blue: #CDE6F8;
+    --color-dp-lime-green: #08deba;
     --breakpoint-3xl: 107.5rem;
     --breakpoint-4xl: 120rem;   
-    --font-mona: "Mona Sans", sans-serif !important
+    --font-mona: "Mona Sans", sans-serif !important;
+    --font-rethink-sans: "Rethink Sans", sans-serif !important;
 }
 
 .ant-menu .ant-menu-item-selected .ant-menu-item-icon {

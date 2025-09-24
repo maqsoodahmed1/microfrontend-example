@@ -4,6 +4,9 @@ import { useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import { cn } from '../helpers/general.helpers';
 import { CloseIcon } from '../assets/icons';
+import DPTable from './shared/atoms/dp-table';
+import { ArrowDownOutlined, ArrowUpOutlined, SwapOutlined } from '@ant-design/icons';
+import StatCard from './shared/atoms/stat-card';
 
 const { Content } = AntLayout;
 const { Title, Text } = Typography;
@@ -18,9 +21,485 @@ const Layout: React.FC<LayoutProps> = ({ children, title, description }) => {
   const location = useLocation();
   const pathName = location.pathname;
 
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      sorter: (a, b) => a.age - b.age, // 👈 numeric sort
+    },
+    {
+      title: "Age",
+      dataIndex: "age",
+      key: "age",
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
+    },
+  ];
+
+  const data = [
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: Math.random(),
+      name: "John Doe",
+      age: 28,
+      address: "123 Main Street",
+    },
+    {
+      key: "2",
+      name: "Jane Smith",
+      age: 32,
+      address: "456 Oak Avenue",
+    },
+    {
+      key: "3",
+      name: "Sam Wilson",
+      age: 41,
+      address: "789 Pine Road",
+    },
+  ];
   const sideBarCollapsed = (collapsed: boolean) => {
     const layout: HTMLElement = document.getElementById("main-layout-sec")!;
-
     if (!collapsed) {
       layout?.classList.add(
         "before:content-['']",
@@ -59,8 +538,10 @@ const Layout: React.FC<LayoutProps> = ({ children, title, description }) => {
       )}>
       <Sidebar sideBarCollapsed={sideBarCollapsed} />
       <AntLayout>
-        <Content className="min-h-[120px] overflow-auto bg-transparent">
-          {children}
+        <Content className="min-h-[120px] [&_*]:!font-rethink-sans overflow-auto bg-transparent p-10">
+          <StatCard />
+          <DPTable columns={columns} dataSource={data} />
+          {/* {children} */}
         </Content>
       </AntLayout>
     </AntLayout>

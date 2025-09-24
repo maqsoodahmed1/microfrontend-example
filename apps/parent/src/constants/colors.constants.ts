@@ -4,9 +4,11 @@ const primary = (color: string) =>
 export const COLORS = {
   PRIMARY: primary("--color-primary"),
   DP_GRAY: primary("--color-dp-gray"),
+  DP_GRAY_BLUE: primary("--color-dp-gray-blue"),
   DP_GRAY_SEMI: primary("--color-dp-gray-semi"),
   DP_GRAY_DARK: primary("--color-dp-gray-dark"),
-  DP_ICE_BLUE: primary("--color-dp-ice-blue")
+  DP_ICE_BLUE: primary("--color-dp-ice-blue"),
+  DP_LIME_GREEN: primary("--color-dp-lime-green"),
 };
 
 export const getColorIntensity = (color: string, intensity: number) => {

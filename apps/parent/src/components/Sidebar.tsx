@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { ConfigProvider, Menu, MenuProps } from "antd";
+import { ConfigProvider, Form, Menu, MenuProps } from "antd";
 import type { MenuInfo } from "rc-menu/lib/interface";
 import Sider from "antd/es/layout/Sider";
 
 import { ROUTES } from "../constants/app-routes.constants";
 import { COLORS } from "../constants/colors.constants";
-import { BulletIcon, ContactsIcon, DataphoneLogo, LiveCallsIcon, ReportsIcon, SettingsIcon, SidebarTriggerIcon, SmsIcon } from "../assets/icons";
+import { BulletIcon, ContactsIcon, DataphoneDIcon, DataphoneLogo, LiveCallsIcon, ReportsIcon, SettingsIcon, SidebarTriggerIcon, SmsIcon } from "../assets/icons";
 import DPSelect from "./shared/atoms/dp-select";
 import { cn } from "../helpers/general.helpers";
 
@@ -166,9 +166,12 @@ export default function Sidebar({ sideBarCollapsed }: SideCollapsedProps) {
           />
         </div>
         <div className="px-4">
-          <DPSelect
-            options={[{ label: "test", value: "test", }, { label: "test", value: "stest" }]} className="w-full !h-14" showSearch placeholder="Dataphone Accounts"
-          />
+          <Form.Item className="relative">
+            <DPSelect
+              options={[{ label: "test", value: "test", }, { label: "test", value: "stest" }]} className="w-full !h-14 [&_.ant-select-selector]:!pl-14 [&_.ant-select-selection-search-input]:!pl-11" showSearch placeholder="Dataphone Accounts"
+            />
+            <DataphoneDIcon className="absolute top-[50%] -translate-y-[50%] left-6" />
+          </Form.Item>
         </div>
       </Sider>
     </ConfigProvider>

@@ -17,10 +17,10 @@ import { COLORS, getColorIntensity } from './constants/colors.constants';
 
 // Inline loading component for page transitions
 const PageLoading: React.FC = () => (
-  <div style={{ 
-    display: 'flex', 
-    justifyContent: 'center', 
-    alignItems: 'center', 
+  <div style={{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     height: '200px',
     flexDirection: 'column',
     gap: '16px'
@@ -67,8 +67,8 @@ class ErrorBoundary extends React.Component<
               <summary style={{ cursor: 'pointer', color: '#1890ff' }}>
                 Error details
               </summary>
-              <pre style={{ 
-                fontSize: '12px', 
+              <pre style={{
+                fontSize: '12px',
                 marginTop: '8px',
                 background: '#f5f5f5',
                 padding: '8px',
@@ -99,6 +99,13 @@ const App: React.FC = () => {
         <ConfigProvider
           theme={{
             components: {
+              Tooltip: {
+                borderRadius: 12,
+                paddingXS: 10,
+                paddingSM: 20,
+                fontSize: 12,
+                colorBgSpotlight:  getColorIntensity(COLORS.PRIMARY, 0.8)
+              },
               Select: {
                 controlHeight: 53,
                 colorText: COLORS.DP_GRAY_DARK,
@@ -114,6 +121,14 @@ const App: React.FC = () => {
                 optionPadding: 10,
                 // colorBgElevated: COLORS.SECONDARY_DARK_V2,
               },
+              Table: {
+                colorText: COLORS.DP_GRAY_BLUE,
+                colorTextHeading: COLORS.DP_GRAY,
+                // colorTextBase: COLORS.GRAY_COOL,
+                headerSplitColor: "transparent",
+                fontSizeLG: 12,
+                fontSizeXL: 12,
+              },
             },
             token: {
               colorPrimary: COLORS.PRIMARY,
@@ -127,7 +142,7 @@ const App: React.FC = () => {
             <Routes>
               {/* Public route */}
               <Route path="/login" element={<LoginPage />} />
-              
+
               {/* Protected routes */}
               <Route path="/*" element={
                 <ProtectedRoute>
@@ -135,13 +150,13 @@ const App: React.FC = () => {
                     <Routes>
                       {/* Home page at root */}
                       <Route path="/" element={<HomePage />} />
-                      
+
                       {/* User Management Demo */}
                       <Route path="/user-demo" element={<UserManager />} />
-                      
+
                       {/* Shared Components Info */}
                       <Route path="/shared-info" element={<SharedComponentsInfo />} />
-                      
+
                       {/* SMS routes */}
                       <Route path="/sms/page1" element={
                         <Suspense fallback={<PageLoading />}>
@@ -158,7 +173,7 @@ const App: React.FC = () => {
                           <SmsPage3 />
                         </Suspense>
                       } />
-                      
+
                       {/* Reports routes */}
                       <Route path="/reports/page1" element={
                         <Suspense fallback={<PageLoading />}>
@@ -175,7 +190,7 @@ const App: React.FC = () => {
                           <ReportsPage3 />
                         </Suspense>
                       } />
-                      
+
                       {/* Catch all */}
                       <Route path="*" element={
                         <Alert

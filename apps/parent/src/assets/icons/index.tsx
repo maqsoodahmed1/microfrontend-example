@@ -9,8 +9,14 @@ import ReportsIcon from "./reports-icon.svg?react"
 import SettingsIcon from "./settings-icon.svg?react"
 import SmsIcon from "./sms-icon.svg?react"
 import ArrowDownThin from "./arrow-down-thin.svg?react"
+import SortIconAsc from "./sort-icon-asc.svg?react"
+import SortIconDsc from "./sort-icon-dsc.svg?react"
+import SortIcon from "./sort-icon.svg?react"
 
 export {
+    SortIconAsc,
+    SortIconDsc,
+    SortIcon,
     ArrowDownThin,
     BulletIcon,
     CloseIcon,
