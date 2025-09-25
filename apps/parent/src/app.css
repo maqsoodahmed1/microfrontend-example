@@ -67,3 +67,12 @@ html {
     @apply [&_.ant-menu-submenu_.ant-menu-submenu-title:hover]:!text-primary;
     @apply [&_.ant-menu-submenu_.ant-menu-item-only-child]:!bg-transparent [&_.ant-menu-submenu_.ant-menu-item-only-child]:hover:!bg-primary/5;
   }
+
+  .slick-list {
+    cursor: pointer;
+  }
+  
+  .slick-prev:before,
+  .slick-next:before {
+    color: rgba(30, 27, 57, 0.587);
+  }

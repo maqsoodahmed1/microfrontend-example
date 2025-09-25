@@ -8,6 +8,7 @@ import DPTable from './shared/atoms/dp-table';
 import { ArrowDownOutlined, ArrowUpOutlined, SwapOutlined } from '@ant-design/icons';
 import StatCard from './shared/atoms/stat-card';
 import { COLORS } from '../constants/colors.constants';
+import MultiCardCarousel from './shared/molecules/multi-card-carousel';
 
 const { Content } = AntLayout;
 const { Title, Text } = Typography;
@@ -540,13 +541,13 @@ const Layout: React.FC<LayoutProps> = ({ children, title, description }) => {
       <Sidebar sideBarCollapsed={sideBarCollapsed} />
       <AntLayout>
         <Content className="min-h-[120px] [&_*]:!font-rethink-sans overflow-auto bg-transparent p-10">
-          <div className="grid grid-cols-4 gap-x-4 gapy-2 mb-3">
+          <MultiCardCarousel className='mb-4'>
             <StatCard label="Total Reports" value="190" color={COLORS.PRIMARY} icon={<ReportIconWarn className='text-white' />} />
             <StatCard label="Received Reports" value="140" color={COLORS.DP_DARK_GREEN} icon={<ReportIconLeft className='text-white' />} />
             <StatCard label="Sent Reports" value="50" color={COLORS.DP_PURPLE_V2} icon={<ReportIconRight className='text-white' />} />
             <StatCard label="Bulk Reports" value="19" color={COLORS.DP_LIME_GREEN} icon={<ReportIconLeft className='text-white' />} />
             <StatCard label="Failed Reports" value="10" color={COLORS.DP_RED} icon={<ReportIconWarn className='text-white' />} />
-          </div>
+          </MultiCardCarousel>
           <DPTable columns={columns} dataSource={data} />
           {/* {children} */}
         </Content>
