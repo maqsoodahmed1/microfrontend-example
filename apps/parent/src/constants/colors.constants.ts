@@ -15,6 +15,7 @@ export const COLORS = {
   DP_DARK_BLUE: primary("--color-dp-dark-blue"),
   DP_RED: primary("--color-dp-red"),
   DP_DARK_GREEN: primary("--color-dp-dark-green"),
+  DP_DP_BLUE: primary("--color-dp-blue"),
 };
 
 export const getColorIntensity = (color: string, intensity: number) => {

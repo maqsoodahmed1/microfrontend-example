@@ -9,6 +9,7 @@ import { ArrowDownOutlined, ArrowUpOutlined, SwapOutlined } from '@ant-design/ic
 import StatCard from './shared/atoms/stat-card';
 import { COLORS } from '../constants/colors.constants';
 import MultiCardCarousel from './shared/molecules/multi-card-carousel';
+import Banner from './shared/atoms/banner';
 
 const { Content } = AntLayout;
 const { Title, Text } = Typography;
@@ -541,7 +542,8 @@ const Layout: React.FC<LayoutProps> = ({ children, title, description }) => {
       <Sidebar sideBarCollapsed={sideBarCollapsed} />
       <AntLayout>
         <Content className="min-h-[120px] [&_*]:!font-rethink-sans overflow-auto bg-transparent p-10">
-          <MultiCardCarousel className='mb-4'>
+          <Banner title='Analytics' buttonText='Export Data' description='Complete communication suite for modern businesses' className='mb-6'/>
+          <MultiCardCarousel className='mb-6'>
             <StatCard label="Total Reports" value="190" color={COLORS.PRIMARY} icon={<ReportIconWarn className='text-white' />} />
             <StatCard label="Received Reports" value="140" color={COLORS.DP_DARK_GREEN} icon={<ReportIconLeft className='text-white' />} />
             <StatCard label="Sent Reports" value="50" color={COLORS.DP_PURPLE_V2} icon={<ReportIconRight className='text-white' />} />

@@ -13,7 +13,7 @@ interface IStatCard {
 export default function StatsCard({ color, label, value, icon }: IStatCard) {
   return (
     <div className='group border-dp-gray-light border-2 rounded-2xl px-1.5 py-2.5'>
-      <div className="flex min-h-[80px] items-center gap-1 justify-between shadow-sm shadow-off-white rounded-xl bg-white px-4 pt-2 pb-4">
+      <div className="flex min-h-[110px] gap-1 justify-between shadow-sm shadow-off-white rounded-xl bg-white px-4 pt-5 pb-4">
         <div>
           <p className='text-dp-gray-semi font-medium !mb-0.5'>{label}</p>
           <p style={{ color: color }} className='text-xl font-bold !mb-0'>{value}</p>

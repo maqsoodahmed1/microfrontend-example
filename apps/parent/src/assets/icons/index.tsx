@@ -17,8 +17,10 @@ import ReportIconRight from "./report-icon-right-arrow.svg?react"
 import ReportIconWarn from "./report-icon-warn.svg?react"
 import PlusIcon from "./plus-icon.svg?react"
 import MinusIcon from "./minus-icon.svg?react"
+import UploadStackIcon from "./upload-stack-icon.svg?react"
 
 export {
+    UploadStackIcon,
     PlusIcon,
     MinusIcon,
     ReportIconLeft,
