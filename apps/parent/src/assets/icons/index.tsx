@@ -15,8 +15,12 @@ import SortIcon from "./sort-icon.svg?react"
 import ReportIconLeft from "./report-icon-left-arrow.svg?react"
 import ReportIconRight from "./report-icon-right-arrow.svg?react"
 import ReportIconWarn from "./report-icon-warn.svg?react"
+import PlusIcon from "./plus-icon.svg?react"
+import MinusIcon from "./minus-icon.svg?react"
 
 export {
+    PlusIcon,
+    MinusIcon,
     ReportIconLeft,
     ReportIconRight,
     ReportIconWarn,

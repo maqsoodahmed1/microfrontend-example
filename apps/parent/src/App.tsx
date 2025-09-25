@@ -99,6 +99,10 @@ const App: React.FC = () => {
         <ConfigProvider
           theme={{
             components: {
+              Checkbox: {
+                borderRadius: 4,
+                controlInteractiveSize: 18,
+              },
               Tooltip: {
                 borderRadius: 12,
                 paddingXS: 10,

@@ -12,6 +12,7 @@ export const COLORS = {
   DP_GRAY_LIGHT: primary("--color-dp-gray-light"),
   DP_LIME_GREEN: primary("--color-dp-lime-green"),
   DP_PURPLE_V2: primary("--color-dp-purplev2"),
+  DP_DARK_BLUE: primary("--color-dp-dark-blue"),
   DP_RED: primary("--color-dp-red"),
   DP_DARK_GREEN: primary("--color-dp-dark-green"),
 };
