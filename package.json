@@ -6,8 +6,11 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "npm run build:remotes && concurrently \"npm run serve:remotes\" \"npm run dev:parent\"",
+    "dev": "npm run build:remotes && concurrently \"npm run watch:sms\" \"npm run watch:reports\" \"npm run serve:remotes\" \"npm run dev:parent\"",
+    "dev:watch": "concurrently \"npm run watch:sms\" \"npm run watch:reports\" \"npm run dev:parent\"",
     "dev:parent": "cd apps/parent && npm run dev",
+    "watch:sms": "cd apps/sms && npm run build -- --watch",
+    "watch:reports": "cd apps/reports && npm run build -- --watch",
     "build:remotes": "npm run build:sms && npm run build:reports",
     "serve:remotes": "concurrently \"npm run serve:sms\" \"npm run serve:reports\"",
     "build:sms": "cd apps/sms && npm run build",

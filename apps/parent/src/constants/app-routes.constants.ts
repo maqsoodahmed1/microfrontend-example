@@ -1,33 +1,33 @@
 export const ROUTES = {
     CALLS: {
-        LIVE_CALLS: "/dashboard/calls/live-calls",
-        CALL_CENTER: "/dashboard/calls/call-center"
+        LIVE_CALLS: "/calls/live-calls",
+        CALL_CENTER: "/calls/call-center"
     },
     SMS: {
-        DASHBOARD: "/dashboard/sms-dashboard",
-        SMS: "/dashboard/sms",
-        BULK_MESSAGE: "/dashboard/sms/bulk-messages",
-        SCHEDULED_MESSAGE: "/dashboard/sms/scheduled-messages",
-        NUMBER: "/dashboard/sms/number",
-        TEMPLATES: "/dashboard/sms/templates",
-        INTEGRATION: "/dashboard/sms/integration",
-        REPORTS: "/dashboard/sms/reports",
-        CONFIGURATION: "/dashboard/sms/configuration",
+        DASHBOARD: "/sms-dashboard",
+        SMS: "/sms",
+        BULK_MESSAGE: "/sms/bulk-messages",
+        SCHEDULED_MESSAGE: "/sms/scheduled-messages",
+        NUMBER: "/sms/number",
+        TEMPLATES: "/sms/templates",
+        INTEGRATION: "/sms/integration",
+        REPORTS: "/sms/reports",
+        CONFIGURATION: "/sms/configuration",
     },
     REPORTS: {
-        DASHOBARD: "/dashboard/reports",
-        ANALYTICS: "/dashboard/reports/analytics",
-        CUSTOM_REPORTS: "/dashboard/reports/custom-reports"
+        REPORTS: "/reports",
+        ANALYTICS: "/reports/analytics",
+        CUSTOM_REPORTS: "/reports/custom-reports"
     },
     CONTACTS: {
-        DASHBOARD: "/dashboard/contacts-dashboard",
-        CONTACTS: "/dashboard/contacts",
-        CATEGORIES: "/dashboard/contacts/categories",
-        TAGS: "/dashboard/contacts/tags",
+        DASHBOARD: "/contacts-dashboard",
+        CONTACTS: "/contacts",
+        CATEGORIES: "/contacts/categories",
+        TAGS: "/contacts/tags",
     },
     SETTINGS: {
-        ACCOUNTS: "/dashboard/settings/acounts",
-        USERS: "/dashboard/settings/users",
-        ROLE_MANAGEMENT: "/dashboard/settings/role-management"
+        ACCOUNTS: "/settings/acounts",
+        USERS: "/settings/users",
+        ROLE_MANAGEMENT: "/settings/role-management"
     }
 }

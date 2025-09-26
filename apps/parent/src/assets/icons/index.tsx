@@ -18,8 +18,24 @@ import ReportIconWarn from "./report-icon-warn.svg?react"
 import PlusIcon from "./plus-icon.svg?react"
 import MinusIcon from "./minus-icon.svg?react"
 import UploadStackIcon from "./upload-stack-icon.svg?react"
+import BookmarkIcon from "./bookmark-icon.svg?react"
+import CallIconPointy from "./call-icon-pointy.svg?react"
+import Downloadcon from "./download-icon.svg?react"
+import IncomingCallIcon from "./incoming-call.svg?react"
+import OutgoingCallIcon from "./outgong-call.svg?react"
+import PencilIcon from "./pencil-icon.svg?react"
+import PlayIcon from "./play-icon.svg?react"
+import LocalCallcon from "./local-call.svg?react"
 
 export {
+    LocalCallcon,
+    BookmarkIcon,
+    CallIconPointy,
+    Downloadcon,
+    IncomingCallIcon,
+    OutgoingCallIcon,
+    PencilIcon,
+    PlayIcon,
     UploadStackIcon,
     PlusIcon,
     MinusIcon,

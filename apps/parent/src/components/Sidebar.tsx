@@ -215,7 +215,7 @@ const menuItems = [
     label: "Reports",
     icon: <ReportsIcon className="size-5 2xl:size-6 text-dp-gray" />,
     children: [
-      { key: ROUTES.REPORTS.DASHOBARD, label: "Dashboard" },
+      { key: ROUTES.REPORTS.REPORTS, label: "Reports" },
       { key: ROUTES.REPORTS.ANALYTICS, label: "Analytics" },
       { key: ROUTES.REPORTS.CUSTOM_REPORTS, label: "Custom Reports" },
     ]

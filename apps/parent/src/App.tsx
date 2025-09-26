@@ -14,6 +14,7 @@ import UserManager from './components/UserManager';
 import SharedComponentsInfo from './components/SharedComponentsInfo';
 import HomePage from './components/HomePage';
 import { COLORS, getColorIntensity } from './constants/colors.constants';
+import { ROUTES } from './constants/app-routes.constants';
 
 // Inline loading component for page transitions
 const PageLoading: React.FC = () => (
@@ -179,7 +180,7 @@ const App: React.FC = () => {
                       } />
 
                       {/* Reports routes */}
-                      <Route path="/reports/page1" element={
+                      <Route path={ROUTES.REPORTS.REPORTS} element={
                         <Suspense fallback={<PageLoading />}>
                           <ReportsPage1 />
                         </Suspense>

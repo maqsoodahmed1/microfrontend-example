@@ -33,7 +33,7 @@ const DropdownChecklist = ({
     };
 
     const content = (
-        <div className="!space-y-5 !text-base px-4 py-3 rounded-xl bg-white shadow-lg shadow-gray-200 text-dark-blue font-semibold">
+        <div onClick={(e) => e.stopPropagation()} className="!space-y-5 !text-base px-4 py-3 rounded-xl bg-white shadow-lg shadow-gray-200 text-dark-blue font-semibold">
             {options.map(({ label, value }) => (
                 <div key={value} style={{ marginBottom: 8 }}>
                     <DPCheckbox
