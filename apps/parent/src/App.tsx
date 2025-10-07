@@ -109,7 +109,16 @@ const App: React.FC = () => {
                 paddingXS: 10,
                 paddingSM: 20,
                 fontSize: 12,
-                colorBgSpotlight:  getColorIntensity(COLORS.PRIMARY, 0.8)
+                colorBgSpotlight: getColorIntensity(COLORS.PRIMARY, 0.8)
+              },
+              DatePicker: {
+                controlHeight: 53,
+                borderRadius: 11,
+                colorBorder: COLORS.DP_ICE_BLUE,
+                hoverBorderColor: getColorIntensity(COLORS.PRIMARY, 0.55),
+                activeBorderColor: getColorIntensity(COLORS.PRIMARY, 0.55),
+                fontWeightStrong: 600,
+                colorTextPlaceholder: COLORS.DP_GRAY_SEMI,
               },
               Select: {
                 controlHeight: 53,

@@ -26,8 +26,20 @@ import OutgoingCallIcon from "./outgong-call.svg?react"
 import PencilIcon from "./pencil-icon.svg?react"
 import PlayIcon from "./play-icon.svg?react"
 import LocalCallcon from "./local-call.svg?react"
+import ArrowReloadIcon from "./arrow-reload.svg?react"
+import CalenderThinIcon from "./calendar-thin.svg?react"
+import FilterIcon from "./filter-icon.svg?react"
+import DownloadStackIcon from "./download-stack.svg?react"
+import ArrowLeftRightIcon from "./arros-left-right.svg?react"
+import CloseIcon2 from "./close-icon-2.svg?react"
 
 export {
+    ArrowLeftRightIcon,
+    CloseIcon2,
+    ArrowReloadIcon,
+    CalenderThinIcon,
+    FilterIcon,
+    DownloadStackIcon,
     LocalCallcon,
     BookmarkIcon,
     CallIconPointy,

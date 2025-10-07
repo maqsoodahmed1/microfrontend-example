@@ -3,9 +3,9 @@ import { IncomingCallIcon, LocalCallcon, OutgoingCallIcon } from '../../../../as
 import { CallDirection } from '../../../../components/Layout'
 
 const directionInfo: Record<CallDirection, [string, ReactNode]> = {
-    'inbound': ["Incoming", <IncomingCallIcon className='text-dp-dark-green' />],
-    'local': ['Internal', <LocalCallcon className='text-dp-orange' />],
-    "outbound": ["Outgoing", <OutgoingCallIcon className='text-dp-red' />]
+    'inbound': ["Incoming", <IncomingCallIcon className='text-dp-dark-green min-w-fit' />],
+    'local': ['Internal', <LocalCallcon className='text-dp-orange min-w-fit' />],
+    "outbound": ["Outgoing", <OutgoingCallIcon className='text-dp-red min-w-fit' />]
 }
 
 export default function CallDirectionWithIcon({ direction }: { direction: CallDirection }) {

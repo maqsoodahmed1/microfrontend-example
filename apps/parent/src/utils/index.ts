@@ -30,7 +30,7 @@ export default class Utils {
       hash = name.charCodeAt(i) + ((hash << 5) - hash);
     }
     const hue = Math.abs(hash) % 360;
-    return `hsl(${hue}, 60%, 55%)`;
+    return `hsla(${hue}, 60%, 55%, 0.7)`;
   };
 
   public static onlyUnique(value: any, index: number, array: any[]): boolean {
