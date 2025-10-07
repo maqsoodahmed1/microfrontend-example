@@ -32,8 +32,10 @@ import FilterIcon from "./filter-icon.svg?react"
 import DownloadStackIcon from "./download-stack.svg?react"
 import ArrowLeftRightIcon from "./arros-left-right.svg?react"
 import CloseIcon2 from "./close-icon-2.svg?react"
+import SearchIcon from "./search-icon.svg?react"
 
 export {
+    SearchIcon,
     ArrowLeftRightIcon,
     CloseIcon2,
     ArrowReloadIcon,

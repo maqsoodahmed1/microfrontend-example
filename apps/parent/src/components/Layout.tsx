@@ -3,7 +3,7 @@ import { Layout as AntLayout, Avatar, Button, DatePicker, Divider, Flex, Popover
 import { useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import { cn } from '../helpers/general.helpers';
-import { ArrowLeftRightIcon, BookmarkIcon, CalenderThinIcon, CallIconPointy, CloseIcon, CloseIcon2, Downloadcon, DownloadStackIcon, PencilIcon, PlayIcon, ReportIconLeft, ReportIconRight, ReportIconWarn } from '../assets/icons';
+import { ArrowDownThin, ArrowLeftRightIcon, ArrowReloadIcon, BookmarkIcon, CalenderThinIcon, CallIconPointy, CloseIcon, CloseIcon2, Downloadcon, DownloadStackIcon, FilterIcon, PencilIcon, PlayIcon, ReportIconLeft, ReportIconRight, ReportIconWarn, SearchIcon } from '../assets/icons';
 import DPTable from './shared/atoms/dp-table';
 import StatCard from './shared/atoms/stat-card';
 import { COLORS } from '../constants/colors.constants';
@@ -21,6 +21,8 @@ import CallDirectionWithIcon from './shared/atoms/call-direction-with-icon';
 import PopoverDropdown from './shared/atoms/popover-dropdown';
 import DPDateRangePicker from './shared/atoms/dp-date-rangepicker';
 import DPButton from './shared/atoms/dp-button';
+import DPSelect from './shared/atoms/dp-select';
+import DPInput from './shared/atoms/dp-input';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -215,7 +217,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title, description }) => {
         } else if (status === "cancelled" || status === "canceled" || status === "cancel") {
           color = "red";
         }
-        return <Tag color={color}>{_.capitalize(status)}</Tag>;
+        return status ? <Tag color={color}>{_.capitalize(status)}</Tag> : "-";
       },
     },
 
@@ -229,7 +231,13 @@ const Layout: React.FC<LayoutProps> = ({ children, title, description }) => {
         return <Tag>{formatted}</Tag>;
       },
     },
-
+    {
+      title: "Destination",
+      key: "dialed_number",
+      render: (record: CallFields) => {
+        return record.dialed_number ? Utils.formatPhoneNumber(record.dialed_number) : "-";
+      },
+    },
 
     {
       title: "Direction",
@@ -440,14 +448,41 @@ const Layout: React.FC<LayoutProps> = ({ children, title, description }) => {
             <StatCard label="Failed Reports" value="10" color={COLORS.DP_RED} icon={<ReportIconWarn className='text-white' />} />
           </MultiCardCarousel>
           <div className='bg-white rounded-xl'>
-            <div className="flex items-center gap-4 px-5 py-4">
-              <h2 className='text-2xl font-bold !mb-0 text-dp-dark-blue'>Reports</h2>
-              <Divider type="vertical" className='text-dp-gray-blue !h-8 !border-gray-300 !border-s-2' />
-              <Button type='text' className='!p-0 !h-fit !bg-transparent'>
-                <DownloadStackIcon className='text-dp-blue' />
-                <p className='!m-0 font-semibold !text-base text-dp-blue'>Export Report</p>
-              </Button>
-              <FilterDropdown />
+            <div className="flex items-center justify-between px-5 py-4">
+              <div className="flex items-center gap-2 2xl:gap-4">
+                <h2 className='text-2xl font-bold !mb-0 text-dp-dark-blue'>Reports</h2>
+                <Divider type="vertical" className='text-dp-gray-blue !h-8 !border-gray-300 !border-s-2' />
+                <Button type='text' className='!p-0 !h-fit !bg-transparent'>
+                  <DownloadStackIcon className='text-dp-blue' />
+                  <p className='!m-0 font-semibold !text-base text-dp-blue'>Export Report</p>
+                </Button>
+                <Divider type="vertical" className='text-dp-gray-blue !h-8 !border-gray-300 !border-s-2' />
+                <FilterDropdown />
+                <Divider type="vertical" className='text-dp-gray-blue !h-8 !border-gray-300 !border-s-2' />
+                <div className="relative">
+                  <DPSelect
+                    options={[
+                      { label: "Calls", value: "calls" },
+                      { label: "Queues", value: "queues" },
+                      { label: "User", value: "users" },
+                      { label: "Agents", value: "agents" }
+                    ]}
+                    placeholder="Select Report Type"
+                    suffixIcon={<ArrowDownThin className="text-dp-dark-blue !size-4" />}
+                    className="!w-[140px] [&_.ant-select-selector]:!rounded-md [&_.ant-select-selection-item]:!text-dp-gray-blue [&_.ant-select-selection-item]:!font-semibold !h-10 [&_.ant-select-selector]:!pl-11 [&_.ant-select-selection-search-input]:!pl-8"
+                    showSearch
+                  />
+                  <CallIconPointy className="absolute top-[50%] text-dp-dark-blue -translate-y-[50%] left-4" />
+                </div>
+              </div>
+
+              <div className='flex items-center gap-2'>
+                <DPButton type='text' className='!p-0 !text-dp-dark-green !h-fit !bg-transparent'><ArrowReloadIcon className='text-dp-dark-green'/> Refresh</DPButton>
+                <DPInput placeholder="Search" className='!py-2.5 !rounded-md' prefix={<SearchIcon className="text-dp-gray-semi !size-4" />} />
+                <DPButton dpVariant='secondary' className='!px-2 !rounded-lg !bg-primary'>
+                  <FilterIcon className='text-white' />
+                </DPButton>
+              </div>
             </div>
             <DPTable scroll={{ x: columns.length * 140 + 100 }} columns={columns} dataSource={data} />
           </div>
