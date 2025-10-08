@@ -5,10 +5,16 @@ import tailwindcss from '@tailwindcss/vite'
 import svgr from 'vite-plugin-svgr'
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '');
+  const env = loadEnv(mode, process.cwd() + '/../../', '');
+
+  const baseUrl = env.VITE_MICROFRONTEND_BASE_URL || 'https://test-microfrontend.dev.dataphone.cloud';
+  const parentPort = env.VITE_PARENT_PORT || '3000';
+  const smsPort = env.VITE_SMS_PORT || '5003';
+  const reportsPort = env.VITE_REPORTS_PORT || '5004';
 
   return {
     base: '/',
+    envDir: '../../',
     plugins: [
       react(),
       svgr(),
@@ -24,8 +30,8 @@ export default defineConfig(({ mode }) => {
           './utils': './src/utils/index'
         },
         remotes: {
-          sms: 'https://test-microfrontend.dev.dataphone.cloud/sms/assets/remoteEntry.js',
-          reports: 'https://test-microfrontend.dev.dataphone.cloud/reports/assets/remoteEntry.js'
+          sms: `${baseUrl}/sms/assets/remoteEntry.js`,
+          reports: `${baseUrl}/reports/assets/remoteEntry.js`
         },
         shared: ['react', 'react-dom', 'react-redux', '@reduxjs/toolkit']
       })
@@ -37,9 +43,9 @@ export default defineConfig(({ mode }) => {
       minify: false
     },
     server: {
-      port: 3000,
+      port: parseInt(parentPort),
       host: true,
-      allowedHosts: ["test-microfrontend.dev.dataphone.cloud"]
+      allowedHosts: [env.VITE_ALLOWED_HOST || "test-microfrontend.dev.dataphone.cloud"]
     },
     preview: {
       port: 4173,

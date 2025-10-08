@@ -1,17 +1,13 @@
-import { Card } from 'antd'
-import React from 'react'
-// import UserCard from "parent/UserCard";
-// const UserCard = React.lazy(() => import('parent/UserCard'))
+import Stats from './components/Stats'
+import Banner from '../../../../parent/src/components/shared/molecules/banner'
+import ReportsTable from './components/ReportsTable'
 
-export default function Page1() {
+export default function ReportsPage() {
   return (
     <div>
-      {/* <UserCard /> */}
-      ssad
-      <h1>Reports - Page 1123</h1>
-      <Card>
-        <p>This is Reports Page 1 content. You can add your reports functionality here.</p>
-      </Card>
+      <Banner title='Analytics' buttonText='Export Data' description='Complete communication suite for modern businesses' className='mb-6' />
+      <Stats />
+      <ReportsTable />
     </div>
   )
 }

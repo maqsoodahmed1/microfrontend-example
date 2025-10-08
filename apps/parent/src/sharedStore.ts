@@ -8,7 +8,7 @@ export const initializeSharedStore = () => {
   window.__SHARED_STORE_ACTIONS__ = sharedStoreActions;
 
   // Optional: Add debugging helpers in development
-  if (process.env.NODE_ENV === 'development') {
+  if (import.meta.env.NODE_ENV === 'development') {
     (window as any).__REDUX_STORE_DEBUG__ = {
       store,
       actions: sharedStoreActions,

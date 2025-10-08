@@ -44,7 +44,7 @@ html {
   }
 
   .sidebar-menu {
-    @apply z-[1001] h-screen pb-1;
+    @apply z-[1000] h-screen pb-1;
   
     /* font family */
     @apply [&_*]:!font-mona;

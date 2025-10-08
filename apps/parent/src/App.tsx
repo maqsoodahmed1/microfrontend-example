@@ -15,6 +15,7 @@ import SharedComponentsInfo from './components/SharedComponentsInfo';
 import HomePage from './components/HomePage';
 import { COLORS, getColorIntensity } from './constants/colors.constants';
 import { ROUTES } from './constants/app-routes.constants';
+import { useInitialLoader } from './hooks/shared/useInitialLoader';
 
 // Inline loading component for page transitions
 const PageLoading: React.FC = () => (
@@ -36,7 +37,7 @@ const SmsPage1 = lazy(() => import('sms/Page1'));
 const SmsPage2 = lazy(() => import('sms/Page2'));
 const SmsPage3 = lazy(() => import('sms/Page3'));
 
-const ReportsPage1 = lazy(() => import('reports/Page1'));
+const ReportsPage = lazy(() => import('../../reports/src/pages/reports/ReportsPage'));
 const ReportsPage2 = lazy(() => import('reports/Page2'));
 const ReportsPage3 = lazy(() => import('reports/Page3'));
 
@@ -89,6 +90,8 @@ class ErrorBoundary extends React.Component<
 }
 
 const App: React.FC = () => {
+  useInitialLoader();
+
   useEffect(() => {
     // Initialize shared store on app startup
     initializeSharedStore();
@@ -198,7 +201,7 @@ const App: React.FC = () => {
                       {/* Reports routes */}
                       <Route path={ROUTES.REPORTS.REPORTS} element={
                         <Suspense fallback={<PageLoading />}>
-                          <ReportsPage1 />
+                          <ReportsPage />
                         </Suspense>
                       } />
                       <Route path="/reports/page2" element={
