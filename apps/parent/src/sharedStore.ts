@@ -18,5 +18,8 @@ export const initializeSharedStore = () => {
   }
 };
 
+export const getSharedStore = () => window.__SHARED_STORE__;
+export const getSharedStoreActions = () => window.__SHARED_STORE_ACTIONS__;
+
 export { sharedStoreActions, store };
 export type { RootState, AppDispatch } from './store/store';

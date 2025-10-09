@@ -25,11 +25,13 @@ export interface Session {
       }
     | undefined;
   isAuthenticated: boolean;
+  loading: boolean;
 }
 
 const initialState: Session | null = {
   sessionData: undefined,
   isAuthenticated: false,
+  loading: true
 };
 
 const sessionSlice = createSlice({
@@ -39,6 +41,7 @@ const sessionSlice = createSlice({
     setSessionData(state, action: PayloadAction<Session>) {
         state.sessionData = action.payload.sessionData;
         state.isAuthenticated = action.payload.isAuthenticated;
+        state.loading = false
     },
     clearSessionData(state) {
       return initialState;

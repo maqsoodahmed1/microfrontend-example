@@ -1,33 +1,10 @@
 import React, { useState } from 'react';
-import { Layout as AntLayout, Avatar, Button, DatePicker, Divider, Flex, Modal, Popover, Tag, Typography } from 'antd';
+import { Layout as AntLayout, Typography } from 'antd';
 import { useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import { cn } from '../helpers/general.helpers';
-import { ArrowDownThin, ArrowLeftRightIcon, ArrowReloadIcon, BookmarkIcon, CalenderThinIcon, CallIconPointy, CloseIcon, CloseIcon2, Downloadcon, DownloadStackIcon, FilterIcon, PencilIcon, PlayIcon, ReportIconLeft, ReportIconRight, ReportIconWarn, SearchIcon } from '../assets/icons';
-import DPTable from './shared/atoms/dp-table';
-import StatCard from './shared/atoms/stat-card';
-import { COLORS } from '../constants/colors.constants';
-import MultiCardCarousel from './shared/molecules/multi-card-carousel';
-import Banner from './shared/molecules/banner';
-import TableHeaderWithIcons from './shared/molecules/table-header-with-icons';
-import Utils from '../utils';
-import dayjs from 'dayjs';
-
-import _, { startCase } from 'lodash';
-
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
-import CallDirectionWithIcon from './shared/atoms/call-direction-with-icon';
-import PopoverDropdown from './shared/molecules/popover-dropdown';
-import DPDateRangePicker from './shared/atoms/dp-date-rangepicker';
-import DPButton from './shared/atoms/dp-button';
-import DPSelect from './shared/atoms/dp-select';
-import DPInput from './shared/atoms/dp-input';
-dayjs.extend(utc);
-dayjs.extend(timezone);
 
 const { Content } = AntLayout;
-const { Title, Text } = Typography;
 
 interface Application {
   app: string;
@@ -148,8 +125,6 @@ const Layout: React.FC<LayoutProps> = ({ children, title, description }) => {
   const location = useLocation();
   const pathName = location.pathname;
 
-
-
   const sideBarCollapsed = (collapsed: boolean) => {
     const layout: HTMLElement = document.getElementById("main-layout-sec")!;
     if (!collapsed) {
@@ -182,8 +157,6 @@ const Layout: React.FC<LayoutProps> = ({ children, title, description }) => {
       );
     }
   };
-
- 
 
   return (
     <AntLayout

@@ -20,7 +20,7 @@ const DropdownChecklist = ({
     options,
     checkedItems = [],
     onChange,
-    loading = false,
+    // loading = false,
 }: DropdownChecklistProps) => {
     const toggleItem = (value: string) => {
         let newChecked: string[];

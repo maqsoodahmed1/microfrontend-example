@@ -37,6 +37,7 @@ const SmsPage1 = lazy(() => import('sms/Page1'));
 const SmsPage2 = lazy(() => import('sms/Page2'));
 const SmsPage3 = lazy(() => import('sms/Page3'));
 
+const ReportsApp = lazy(() => import('../../reports/src/App'));
 const ReportsPage = lazy(() => import('../../reports/src/pages/reports/ReportsPage'));
 const ReportsPage2 = lazy(() => import('reports/Page2'));
 const ReportsPage3 = lazy(() => import('reports/Page3'));
@@ -198,12 +199,20 @@ const App: React.FC = () => {
                         </Suspense>
                       } />
 
-                      {/* Reports routes */}
-                      <Route path={ROUTES.REPORTS.REPORTS} element={
+                        {/* <Route path={ROUTES.REPORTS.REPORTS} element={
                         <Suspense fallback={<PageLoading />}>
                           <ReportsPage />
                         </Suspense>
-                      } />
+                      } /> */}
+
+                      <Route
+                        path="/reports/*"
+                        element={
+                          <Suspense fallback={<div>Loading Reports...</div>}>
+                            <ReportsApp />
+                          </Suspense>
+                        }
+                      />
                       <Route path="/reports/page2" element={
                         <Suspense fallback={<PageLoading />}>
                           <ReportsPage2 />

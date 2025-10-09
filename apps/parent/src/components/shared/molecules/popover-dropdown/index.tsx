@@ -1,5 +1,5 @@
 import { Button, Popover, PopoverProps } from "antd"
-import { ArrowDownThin, CalenderThinIcon, FilterIcon } from "../../../../assets/icons"
+import { ArrowDownThin } from "../../../../assets/icons"
 import { cn } from "../../../../helpers/general.helpers";
 
 interface PopoverDropdownProps extends PopoverProps {

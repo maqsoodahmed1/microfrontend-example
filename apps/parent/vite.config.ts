@@ -23,9 +23,6 @@ export default defineConfig(({ mode }) => {
         name: 'parent',
         exposes: {
           './SharedStore': './src/sharedStore',
-          './UserCard': './src/components/shared/UserCard',
-          './StatsCard': './src/components/shared/StatsCard',
-          './DataTable': './src/components/shared/DataTable',
           './SharedButton': './src/components/shared/SharedButton',
           './utils': './src/utils/index'
         },

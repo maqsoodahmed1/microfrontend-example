@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
           './Page3': './src/pages/Page3.tsx'
         },
         remotes: {
-          parent: `${baseUrl}/assets/remoteEntry.js`
+          parent: `${baseUrl}/dist/assets/remoteEntry.js`
         },
         shared: ['react', 'react-dom', 'react-redux', '@reduxjs/toolkit']
       })
