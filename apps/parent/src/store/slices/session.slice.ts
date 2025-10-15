@@ -14,16 +14,16 @@ export interface Permissions {
 
 export interface Session {
   sessionData:
-    | {
-        email: string;
-        accountID: string;
-        firstName: string;
-        lastName: string;
-        permissions: Permissions;
-        sessionExpires: string;
-        trustedDevice: boolean;
-      }
-    | undefined;
+  | {
+    email: string;
+    accountID: string;
+    firstName: string;
+    lastName: string;
+    permissions: Permissions;
+    sessionExpires: string;
+    trustedDevice: boolean;
+  }
+  | undefined;
   isAuthenticated: boolean;
   loading: boolean;
 }
@@ -39,9 +39,11 @@ const sessionSlice = createSlice({
   initialState,
   reducers: {
     setSessionData(state, action: PayloadAction<Session>) {
+      // if (action.payload) {
         state.sessionData = action.payload.sessionData;
         state.isAuthenticated = action.payload.isAuthenticated;
-        state.loading = false
+      // }
+      state.loading = false
     },
     clearSessionData(state) {
       return initialState;

@@ -6,6 +6,7 @@ import { useAuthModule } from "./useAuthHook";
 import { AppDispatch } from "src/sharedStore";
 
 import { setSessionData } from "../../store/slices/session.slice";
+import { fetchDefinitions } from "../../../../reports/src/store/slices/filter.slice";
 
 
 export function useInitialLoader() {

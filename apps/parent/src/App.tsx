@@ -16,21 +16,7 @@ import HomePage from './components/HomePage';
 import { COLORS, getColorIntensity } from './constants/colors.constants';
 import { ROUTES } from './constants/app-routes.constants';
 import { useInitialLoader } from './hooks/shared/useInitialLoader';
-
-// Inline loading component for page transitions
-const PageLoading: React.FC = () => (
-  <div style={{
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '200px',
-    flexDirection: 'column',
-    gap: '16px'
-  }}>
-    <Spin size="large" />
-    <span style={{ color: '#666' }}>Loading page...</span>
-  </div>
-);
+import PageLoading from './components/shared/molecules/page-loader';
 
 // Lazy load remote components
 const SmsPage1 = lazy(() => import('sms/Page1'));
@@ -208,7 +194,7 @@ const App: React.FC = () => {
                       <Route
                         path="/reports/*"
                         element={
-                          <Suspense fallback={<div>Loading Reports...</div>}>
+                          <Suspense fallback={<PageLoading />}>
                             <ReportsApp />
                           </Suspense>
                         }
