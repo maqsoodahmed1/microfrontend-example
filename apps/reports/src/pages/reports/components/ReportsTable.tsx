@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { Dispatch, SetStateAction, useMemo, useState } from 'react'
 
 import { Flex, Modal, Divider, Button, Avatar, Tag } from 'antd'
 
@@ -6,6 +6,8 @@ import dayjs from 'dayjs'
 import utc from "dayjs/plugin/utc";
 import _ from 'lodash'
 import timezone from "dayjs/plugin/timezone";
+
+import { useDispatch, useSelector } from "react-redux";
 
 import DPDateRangePicker from '../../../../../parent/src/components/shared/atoms/dp-date-rangepicker'
 import DPSelect from '../../../../../parent/src/components/shared/atoms/dp-select'
@@ -34,6 +36,9 @@ import Utils from '../../../../../parent/src/utils'
 import { FilterDropdown } from './FilterDropDown'
 
 import useCallRecordsTableColumns from '../../hooks/useCallRecordsTableColumns'
+import { setFilterType, setMultipleFilters } from '../../../store/slices/filter.slice';
+import { AppDispatch, RootState } from '../../../store';
+import { FieldItem, ReportType } from '../../../types';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -43,6 +48,8 @@ interface ReportTableProps<T> {
     total: number;
     loading: boolean;
     tableHeight?: number;
+    selectedFields: FieldItem[];
+    setSelectedReportsFields: Dispatch<SetStateAction<FieldItem[]>>;
 }
 
 const reportSelectedFields = [
@@ -106,14 +113,19 @@ const data = [
 
 ];
 
-function ReportsTableInner<T>({ records, total, loading, tableHeight }: ReportTableProps<T>) {
+function ReportsTableInner<T>({ records, total, loading, selectedFields, setSelectedReportsFields }: ReportTableProps<T>) {
     const [filterOpen, setFilterOpen] = useState(false);
+    const dispatch = useDispatch<AppDispatch>();
+    const route = 'reports' as const;
+
+    const { filterType, filters } = useSelector((state: RootState) => state.filters);
+    const routeFilterType = filterType[route] as ReportType;
+    const routeFilters = filters[route] || {};
 
     const columns = useCallRecordsTableColumns()
 
-
     const tableColumns = useMemo(() => {
-        const baseColumns = reportSelectedFields
+        const baseColumns = selectedFields
             .filter((field) => !["id", "call_flow", 'cdr_id', 'queue_id', 'member_id'].includes(field.id))
             .map((field) => {
                 const columnDef = columns.find((col: any) => col.key === field.id);
@@ -124,20 +136,20 @@ function ReportsTableInner<T>({ records, total, loading, tableHeight }: ReportTa
                     dataIndex: columnDef?.dataIndex,
                     render: (text: any, record: any) =>
                         columnDef && typeof columnDef.render === 'function'
-                          ? columnDef.render(text)
-                          : record[field.id],
+                            ? columnDef.render(text)
+                            : record[field.id],
                 }
 
             })
 
         return baseColumns;
-    }, [columns])
+    }, [columns, selectedFields])
 
     return (
         <div className='bg-white rounded-xl'>
             <div className="flex items-center justify-between px-5 py-4">
                 <div className="flex items-center gap-2 2xl:gap-4">
-                    <h2 className='text-2xl font-bold !mb-0 text-dp-dark-blue'>Reportss</h2>
+                    <h2 className='text-2xl font-bold !mb-0 text-dp-dark-blue'>Reports</h2>
                     <Divider type="vertical" className='text-dp-gray-blue !h-8 !border-gray-300 !border-s-2' />
                     <Button type='text' className='!p-0 !h-fit !bg-transparent'>
                         <DownloadStackIcon className='text-dp-blue' />
@@ -148,6 +160,11 @@ function ReportsTableInner<T>({ records, total, loading, tableHeight }: ReportTa
                     <Divider type="vertical" className='text-dp-gray-blue !h-8 !border-gray-300 !border-s-2' />
                     <div className="relative">
                         <DPSelect
+                            value={routeFilterType}
+                            onSelect={(value) => {
+                                setSelectedReportsFields([])
+                                dispatch(setFilterType({ route, value }))
+                            }}
                             options={[
                                 { label: "Calls", value: "calls" },
                                 { label: "Queues", value: "queues" },
@@ -180,7 +197,29 @@ function ReportsTableInner<T>({ records, total, loading, tableHeight }: ReportTa
                     <DPSelect className='' />
                 </div>
             </Modal>
-            <DPTable scroll={{ x: columns.length * 150 + 100 }} columns={tableColumns} dataSource={records} />
+            <DPTable
+                scroll={{ y: 500, x: columns.length * 150 + 100 }}
+                loading={loading}
+                pagination={{
+                    pageSize: (routeFilters.limit as number) || 500,
+                    current: routeFilters.offset
+                        ? Math.floor((routeFilters.offset as number) / ((routeFilters.limit as number) || 500)) + 1
+                        : 1,
+                    total: Number(total),
+                    onChange: (page, pageSize) => {
+                        const offset = (page - 1) * pageSize;
+                        dispatch(setMultipleFilters({ route, values: { limit: pageSize, offset } }));
+                    },
+                    showSizeChanger: true,
+                    onShowSizeChange: (current, size) => {
+                        const offset = (current - 1) * size;
+                        dispatch(setMultipleFilters({ route, values: { limit: size, offset } }));
+                    },
+                    showQuickJumper: true,
+                    showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
+                }}
+                columns={tableColumns}
+                dataSource={records} />
         </div>
     )
 }

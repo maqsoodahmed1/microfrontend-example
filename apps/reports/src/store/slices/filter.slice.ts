@@ -39,22 +39,6 @@ export const fetchDefinitions = createAsyncThunk(
     }
 );
 
-export const fetchReportData = createAsyncThunk(
-    'dynamicFilters/fetchReportData',
-    async (params: DataApiParams) => {
-        const data = await CdrApiService.fetchData(params);
-        return data;
-    }
-);
-
-export const fetchReportSummary = createAsyncThunk(
-    'dynamicFilters/fetchReportSummary',
-    async (params: SummaryApiParams) => {
-        const data = await CdrApiService.fetchSummary(params);
-        return data;
-    }
-);
-
 const dynamicFiltersSlice = createSlice({
     name: 'dynamicFilters',
     initialState,
@@ -107,32 +91,12 @@ const dynamicFiltersSlice = createSlice({
           state.definitions = action.payload;
           const analyticsType = state.filterType.analytics;
           const reportsType = state.filterType.reports;
-          const analyticsDef = action.payload[analyticsType];
-          const reportsDef = action.payload[reportsType];
           state.filters.analytics = getDefaultFilters(analyticsType);
           state.filters.reports = getDefaultFilters(reportsType);
         })
         .addCase(fetchDefinitions.rejected, (state) => {
           state.loading.definitions = false;
         })
-        .addCase(fetchReportData.pending, (state) => {
-          state.loading.data = true;
-        })
-        .addCase(fetchReportData.fulfilled, (state) => {
-          state.loading.data = false;
-        })
-        .addCase(fetchReportData.rejected, (state) => {
-          state.loading.data = false;
-        })
-        .addCase(fetchReportSummary.pending, (state) => {
-          state.loading.summary = true;
-        })
-        .addCase(fetchReportSummary.fulfilled, (state) => {
-          state.loading.summary = false;
-        })
-        .addCase(fetchReportSummary.rejected, (state) => {
-          state.loading.summary = false;
-        });
     },
 });
 

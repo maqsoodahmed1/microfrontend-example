@@ -43,21 +43,21 @@ export default function useCallRecordsTableColumns() {
             key: "start_timestamp",
             width: 200,
             dataIndex: "start_timestamp",
-            render: (startTime: string) => `${dayjs(startTime).format("MM/DD/YYYY")} - ${dayjs(startTime).format("hh:mm A")}`,
+            render: (startTime: string) => startTime ? `${dayjs(startTime).format("MM/DD/YYYY")} - ${dayjs(startTime).format("hh:mm A")}` : "-",
         },
         {
             title: "End Time",
             key: "end_timestamp",
             width: 200,
             dataIndex: "end_timestamp",
-            render: (endTime: string) => `${dayjs(endTime).format("MM/DD/YYYY")} - ${dayjs(endTime).format("hh:mm A")}`,
+            render: (endTime: string) => endTime ? `${dayjs(endTime).format("MM/DD/YYYY")} - ${dayjs(endTime).format("hh:mm A")}` : "-",
         },
         {
             title: "Answer Time",
             key: "answer_timestamp",
             width: 200,
             dataIndex: "answer_timestamp",
-            render: (answerTime: string) => `${dayjs(answerTime).format("MM/DD/YYYY")} - ${dayjs(answerTime).format("hh:mm:ss A")}`,
+            render: (answerTime: string) => answerTime ? `${dayjs(answerTime).format("MM/DD/YYYY")} - ${dayjs(answerTime).format("hh:mm:ss A")}` : "-",
         },
         {
             title: "Duration",
@@ -133,7 +133,6 @@ export default function useCallRecordsTableColumns() {
                         maxCount={2}
                         style={{
                             color: "white",
-                            backgroundColor: Utils.getAvatarColor(record?.user_ext),
                             cursor: "pointer",
                             fontWeight: "600",
                         }}
@@ -164,10 +163,7 @@ export default function useCallRecordsTableColumns() {
             title: "Phone Number",
             key: "our_e164",
             dataIndex: "our_e164",
-            render: (numbers: string[]) =>
-                numbers?.length
-                    ? numbers.map(num => Utils.formatPhoneNumber(num)).join(", ")
-                    : "-",
+            render: (numbers: string[]) => console.log(numbers)
         },
         {
             title: "Other Phone Number(s)",
@@ -177,7 +173,7 @@ export default function useCallRecordsTableColumns() {
             render: (numbers: string[]) =>
                 numbers?.length ? (
                     <div className="flex flex-col gap-1 max-h-[100px] overflow-y-auto">
-                        {numbers.map((num, index) => (
+                        {numbers?.map((num, index) => (
                             <div key={index} className="flex items-center gap-2">
                                 {Utils.formatPhoneNumber(num)}
                                 <BookmarkIcon className="text-dp-dark-green" />
