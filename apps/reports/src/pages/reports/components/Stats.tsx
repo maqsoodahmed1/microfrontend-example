@@ -22,7 +22,7 @@ export default function Stats({ summary, selectedSummaryFieldIds, onAddSummaryFi
   const effectiveSelected = selectedSummaryFieldIds && selectedSummaryFieldIds.length ? selectedSummaryFieldIds : internalSelected;
 
   return (
-    <MultiCardCarousel className='mb-6'>
+    <MultiCardCarousel className='mb-3.5'>
       {effectiveSelected?.map((id, index) => {
         const label = currentDef?.summaryFields?.[id] || id;
 

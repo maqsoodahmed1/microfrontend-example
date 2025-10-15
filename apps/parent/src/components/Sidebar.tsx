@@ -146,13 +146,13 @@ export default function Sidebar({ sideBarCollapsed }: SideCollapsedProps) {
           { "absolute": screenSize?.width && screenSize.width <= 991 },
         )}
       >
-        <div className="group relative border-b border-gray-200 flex h-20 items-center justify-center overflow-hidden transition-all duration-200 ease-in-out hover:bg-primary/5">
+        <div className="group relative border-b border-gray-200 flex h-16 items-center justify-center overflow-hidden transition-all duration-200 ease-in-out hover:bg-primary/5">
           <DataphoneLogo className=" transform transition-transform duration-200 ease-in-out group-hover:scale-105" />
         </div>
         <div className="no-scrollbar mt-8 h-[calc(100vh-180px)] overflow-auto">
           <Menu
             selectedKeys={selectedKeys}
-            className="!text-sm 2xl:!text-base 4xl:!text-lg [&_.ant-menu-submenu-selected]:!font-medium [&_.ant-menu-submenu-selected_.ant-menu-submenu-title_.ant-menu-title-content]:font-semibold font-medium !px-2"
+            className="!text-sm [&_.ant-menu-submenu-selected]:!font-medium [&_.ant-menu-submenu-selected_.ant-menu-submenu-title_.ant-menu-title-content]:font-semibold font-medium !px-2"
             openKeys={openKeys}
             mode="inline"
             items={adminSidebarItems}

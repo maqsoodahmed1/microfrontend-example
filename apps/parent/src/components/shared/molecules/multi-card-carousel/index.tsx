@@ -57,7 +57,7 @@ const MultiCardCarousel: React.FC<MultiCardCarouselProps> = ({
     const carouselSettings = { ...defaultSettings, ...settings };
 
     return (
-        <div className={cn("w-full px-5", className)}>
+        <div className={cn("w-full", className)}>
             <Slider {...carouselSettings}>
                 {React.Children.map(children, (child) => (
                     <div className="px-1.5 box-border">{child}</div>

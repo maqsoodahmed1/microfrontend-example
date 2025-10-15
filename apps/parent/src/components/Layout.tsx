@@ -165,7 +165,10 @@ const Layout: React.FC<LayoutProps> = ({ children, title, description }) => {
       )}>
       <Sidebar sideBarCollapsed={sideBarCollapsed} />
       <AntLayout>
-        <Content className="min-h-[120px] [&_*]:!font-rethink-sans overflow-auto bg-transparent p-10">
+        <div className="h-[64px]   border-b pb-5 pt-3 pl-5 border-l bg-white border-gray-200">
+          <h2 className='text-primary text-xl font-rethink-sans font-semibold'>Reports</h2>
+        </div>
+        <Content className="min-h-[120px] [&_*]:!font-rethink-sans overflow-auto bg-transparent px-10 py-5">
           {children}
         </Content>
       </AntLayout>

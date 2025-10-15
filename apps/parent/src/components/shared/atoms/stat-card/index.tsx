@@ -39,7 +39,8 @@ export default function StatsCard({ color, label, value, icon, fieldKey, availab
 
   return (
     <div className='group border-dp-gray-light border-2 rounded-2xl px-1.5 py-2.5'>
-      <div className="flex min-h-[110px] gap-1 justify-between shadow-sm shadow-off-white rounded-xl bg-white px-4 pt-5 pb-4">
+      {/* todo height change */}
+      <div className="flex min-h-[98px] gap-1 justify-between shadow-sm shadow-off-white rounded-xl bg-white px-4 pt-5 pb-4">
         <div>
           <p className='text-dp-gray-semi font-medium !mb-0.5'>{label}</p>
           <p style={{ color: color }} className='text-xl font-bold !mb-0'>{formatValue(value, label)}</p>
@@ -49,7 +50,7 @@ export default function StatsCard({ color, label, value, icon, fieldKey, availab
         })}>
           {icon}
         </span>
-        <div className={cn('hidden flex-col items-center gap-1', {
+        <div className={cn('hidden flex-col items-center gap-3', {
           'group-hover:flex': true
         })}>
           <DropdownChecklist
@@ -60,11 +61,10 @@ export default function StatsCard({ color, label, value, icon, fieldKey, availab
               .map(([id, label]) => ({
                 label: String(label),
                 value: id,
-                // onClick: () => { onAddSummaryField && onAddSummaryField(id); },
               }))}
           >
             <span className='size-6 bg-dp-dark-green/5 rounded-full cursor-pointer grid place-items-center'>
-              <PlusIcon className='text-dp-dark-green' />
+              <PlusIcon className='text-dp-dark-green !size-3' />
             </span>
           </DropdownChecklist>
           <span
@@ -73,7 +73,7 @@ export default function StatsCard({ color, label, value, icon, fieldKey, availab
               onRemoveSummaryField && onRemoveSummaryField(fieldKey);
             }}
             className='size-6 rounded-full bg-dp-red/5 grid place-items-center cursor-pointer'>
-            <MinusIcon className='text-dp-red' />
+            <MinusIcon className='text-dp-red size-3' />
           </span>
         </div>
       </div>

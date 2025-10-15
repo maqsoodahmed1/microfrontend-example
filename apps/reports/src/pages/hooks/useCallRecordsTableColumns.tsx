@@ -55,7 +55,7 @@ export default function useCallRecordsTableColumns() {
         {
             title: "Answer Time",
             key: "answer_timestamp",
-            width: 200,
+            width: 260,
             dataIndex: "answer_timestamp",
             render: (answerTime: string) => answerTime ? `${dayjs(answerTime).format("MM/DD/YYYY")} - ${dayjs(answerTime).format("hh:mm:ss A")}` : "-",
         },
@@ -129,6 +129,7 @@ export default function useCallRecordsTableColumns() {
             render: (record: CallFields) => (
                 <Flex vertical>
                     <Avatar.Group
+                    className="[&_.ant-avatar]:!size-7 [&_.ant-avatar_.ant-avatar-string]:!text-[9px]"
                         size="large"
                         maxCount={2}
                         style={{
@@ -143,6 +144,8 @@ export default function useCallRecordsTableColumns() {
                                 .filter(Utils.onlyUnique)
                                 .map((extension: string) => (
                                     <Avatar
+                    className="[&_.ant-avatar]:!size-10"
+
                                         style={{
                                             backgroundColor: Utils.getAvatarColor(extension),
                                             cursor: "pointer",

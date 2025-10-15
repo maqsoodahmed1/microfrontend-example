@@ -49,7 +49,11 @@ interface ReportTableProps<T> {
     loading: boolean;
     tableHeight?: number;
     selectedFields: FieldItem[];
+    allFields: FieldItem[];
     setSelectedReportsFields: Dispatch<SetStateAction<FieldItem[]>>;
+    onAddField: (fieldId: string[]) => void;
+    onRemoveField: (fieldId: string) => void;
+    setSelectedSummaryFieldIds: Dispatch<SetStateAction<string[]>>;
 }
 
 const reportSelectedFields = [
@@ -113,7 +117,7 @@ const data = [
 
 ];
 
-function ReportsTableInner<T>({ records, total, loading, selectedFields, setSelectedReportsFields }: ReportTableProps<T>) {
+function ReportsTableInner<T>({ records, total, loading, selectedFields, setSelectedReportsFields, allFields, setSelectedSummaryFieldIds, onAddField, onRemoveField }: ReportTableProps<T>) {
     const [filterOpen, setFilterOpen] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
     const route = 'reports' as const;
@@ -131,8 +135,19 @@ function ReportsTableInner<T>({ records, total, loading, selectedFields, setSele
                 const columnDef = columns.find((col: any) => col.key === field.id);
 
                 return {
+                    ...columnDef,
                     key: field.id,
-                    title: <TableHeaderWithIcons title={field.label} />,
+                    title: <TableHeaderWithIcons
+                        onRemove={() => onRemoveField(field.id)}
+                        items={allFields?.filter((f) => !selectedFields.some((s) => s.id === f.id)).map((f) => ({
+                            label: f.label,
+                            value: f.id,
+                        }))}
+                        title={field.label}
+                        fieldId={field.id}
+                        onAddSummaryField={onAddField}
+                        selectedColumnFields={selectedFields.map((f) => f.id)}
+                    />,
                     dataIndex: columnDef?.dataIndex,
                     render: (text: any, record: any) =>
                         columnDef && typeof columnDef.render === 'function'
@@ -146,14 +161,14 @@ function ReportsTableInner<T>({ records, total, loading, selectedFields, setSele
     }, [columns, selectedFields])
 
     return (
-        <div className='bg-white rounded-xl'>
+        <div className='bg-white rounded-xl overflow-hidden'>
             <div className="flex items-center justify-between px-5 py-4">
                 <div className="flex items-center gap-2 2xl:gap-4">
-                    <h2 className='text-2xl font-bold !mb-0 text-dp-dark-blue'>Reports</h2>
+                    <h2 className='text-xl font-bold !mb-0 text-dp-dark-blue'>Reports</h2>
                     <Divider type="vertical" className='text-dp-gray-blue !h-8 !border-gray-300 !border-s-2' />
                     <Button type='text' className='!p-0 !h-fit !bg-transparent'>
                         <DownloadStackIcon className='text-dp-blue' />
-                        <p className='!m-0 font-semibold !text-base text-dp-blue'>Export Report</p>
+                        <p className='!m-0 font-medium !text-sm text-dp-blue'>Export Report</p>
                     </Button>
                     <Divider type="vertical" className='text-dp-gray-blue !h-8 !border-gray-300 !border-s-2' />
                     <FilterDropdown />
@@ -163,6 +178,7 @@ function ReportsTableInner<T>({ records, total, loading, selectedFields, setSele
                             value={routeFilterType}
                             onSelect={(value) => {
                                 setSelectedReportsFields([])
+                                setSelectedSummaryFieldIds([])
                                 dispatch(setFilterType({ route, value }))
                             }}
                             options={[
@@ -173,16 +189,16 @@ function ReportsTableInner<T>({ records, total, loading, selectedFields, setSele
                             ]}
                             placeholder="Select Report Type"
                             suffixIcon={<ArrowDownThin className="text-dp-dark-blue !size-4" />}
-                            className="!w-[140px] [&_.ant-select-selector]:!rounded-md [&_.ant-select-selection-item]:!text-dp-gray-blue [&_.ant-select-selection-item]:!font-semibold !h-10 [&_.ant-select-selector]:!pl-11 [&_.ant-select-selection-search-input]:!pl-8"
+                            className="!w-[140px] [&_.ant-select-selector]:!rounded-md [&_.ant-select-selection-item]:!text-dp-gray-blue [&_.ant-select-selection-item]:!font-semibold !h-9 [&_.ant-select-selector]:!pl-11 [&_.ant-select-selection-search-input]:!pl-8"
                             showSearch
                         />
-                        <CallIconPointy className="absolute top-[50%] text-dp-dark-blue -translate-y-[50%] left-4" />
+                        <CallIconPointy className="absolute top-[50%] text-dp-dark-blue -translate-y-[50%] left-4 !size-4" />
                     </div>
                 </div>
 
                 <div className='flex items-center gap-2'>
                     <DPButton type='text' className='!p-0 !text-dp-dark-green !h-fit !bg-transparent'><ArrowReloadIcon className='text-dp-dark-green' /> Refresh</DPButton>
-                    <DPInput placeholder="Search" className='!py-2.5 !rounded-md' prefix={<SearchIcon className="text-dp-gray-semi !size-4" />} />
+                    <DPInput placeholder="Search" className='!py-2 !rounded-md' prefix={<SearchIcon className="text-dp-gray-semi !size-4" />} />
                     <DPButton onClick={() => setFilterOpen(true)} dpVariant='secondary' className='!px-2 !rounded-lg !bg-primary'>
                         <FilterIcon className='text-white' />
                     </DPButton>
@@ -198,7 +214,7 @@ function ReportsTableInner<T>({ records, total, loading, selectedFields, setSele
                 </div>
             </Modal>
             <DPTable
-                scroll={{ y: 500, x: columns.length * 150 + 100 }}
+                scroll={{ y: 315, x: columns.length * 140 + 100 }}
                 loading={loading}
                 pagination={{
                     pageSize: (routeFilters.limit as number) || 500,

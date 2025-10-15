@@ -134,11 +134,11 @@ const App: React.FC = () => {
               },
               Table: {
                 colorText: COLORS.DP_GRAY_BLUE,
-                colorTextHeading: COLORS.DP_GRAY,
+                colorTextHeading: COLORS.DP_GRAY_LIGHTV2,
                 // colorTextBase: COLORS.GRAY_COOL,
                 headerSplitColor: "transparent",
-                fontSizeLG: 12,
-                fontSizeXL: 12,
+                // fontSizeLG: 12,
+                // fontSizeXL: 12,
               },
             },
             token: {

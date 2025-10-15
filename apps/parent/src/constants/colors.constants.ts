@@ -10,6 +10,7 @@ export const COLORS = {
   DP_ICE_BLUE: primary("--color-dp-ice-blue"),
   DP_OFF_WHITE: primary("--color-off-white"),
   DP_GRAY_LIGHT: primary("--color-dp-gray-light"),
+  DP_GRAY_LIGHTV2: primary("--color-dp-gray-lightv2"),
   DP_LIME_GREEN: primary("--color-dp-lime-green"),
   DP_PURPLE_V2: primary("--color-dp-purplev2"),
   DP_DARK_BLUE: primary("--color-dp-dark-blue"),

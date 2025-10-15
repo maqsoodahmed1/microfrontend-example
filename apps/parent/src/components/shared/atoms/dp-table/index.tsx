@@ -9,7 +9,7 @@ const defaultSortIcon = ({ sortOrder }: { sortOrder: SortOrder }) => {
     return <SortIconAsc />;
 };
 
-export interface PHTableProps extends TableProps {
+export interface DPTableProps extends TableProps {
     showPagination?: boolean;
 }
 
@@ -19,7 +19,7 @@ export default function DPTable({
     pagination,
     className,
     ...props
-}: PHTableProps) {
+}: DPTableProps) {
     const enhancedColumns = props.columns?.map((col) =>
         col.sorter
             ? {
@@ -44,10 +44,12 @@ export default function DPTable({
                     `w-full 
   
                     [&_*]:!text-xs 
-                    xl:[&_*]:!text-sm
-                    3xl:[&_*]:!text-base
+                    xl:[&_*]:!text-xs
 
                     [&_.ant-table-cell]:!font-semibold 
+                    [&_.ant-table-thead>tr>th]:!font-medium   
+                    [&_.ant-table-cell]:!py-2.5
+                    [&_.ant-table-cell]:!px-6
                     [&_.ant-pagination_*]:!font-semibold 
                     [&_.ant-pagination-item_*]:!text-dp-gray 
                     [&_.ant-select-selector]:!text-dp-gray 
@@ -55,8 +57,11 @@ export default function DPTable({
                     [&_.ant-pagination-item-ellipsis]:!text-dp-gray 
                   
                     [&_.ant-pagination]:!py-4 
-                    [&_.ant-pagination]:!pl-4 
+                    [&_.ant-pagination]:!px-4 
                     [&_.ant-pagination]:!my-0 
+                    [&_.ant-pagination_.ant-pagination-total-text]:order-3 
+                    [&_.ant-pagination_.ant-pagination-total-text]:ml-3 
+                    [&_.ant-pagination_.ant-pagination-total-text]:mt-2.5 
                     [&_.ant-pagination-item]:!px-3 
                     [&_.ant-pagination-item-link]:!px-6 
                     [&_.ant-select-single]:!h-[34px] 

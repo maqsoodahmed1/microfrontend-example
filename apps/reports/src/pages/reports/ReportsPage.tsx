@@ -94,24 +94,35 @@ export default function ReportsPage() {
 
   return (
     <div>
-      <Banner title='Analytics' buttonText='Export Data' description='Complete communication suite for modern businesses' className='mb-6' />
+      {/* <Banner title='Analytics' buttonText='Export Data' description='Complete communication suite for modern businesses' className='mb-3.5' /> */}
+      <Banner title='Analytics' buttonText='Export Data' description='Complete communication suite for modern businesses' className='mb-3.5' />
       {summaryLoading ?
         <Spin spinning className='w-full h-[210px] !grid place-items-center mt-20' />
         :
         <Stats
           summary={summary}
-          selectedSummaryFieldIds={selectedSummaryFieldIds} 
-          onAddSummaryField={(id) => setSelectedSummaryFieldIds(id)}
+          selectedSummaryFieldIds={selectedSummaryFieldIds}
+          onAddSummaryField={(ids) => setSelectedSummaryFieldIds(ids)}
           onRemoveSummaryField={(id) => setSelectedSummaryFieldIds((prev: string[]) => prev.filter((x) => x !== id))}
-          />
-          
+        />
+
       }
       <ReportTable
+        allFields={allReportFields}
+        onAddField={(selectedItems: string[]) => {
+          const toAdd = allReportFields.find(f => selectedItems.includes(f.id));
+          if (toAdd && !selectedReportFields.some(f => f.id === toAdd.id)) {
+            setSelectedReportFields(prev => [...prev, toAdd]);
+          }
+        }}
+        onRemoveField={(id) => setSelectedReportFields((prev: FieldItem[]) => prev.filter((x) => x.id !== id))}
         records={reports}
         total={summary?.total_calls ?? 0}
         loading={reportLoading}
         selectedFields={selectedReportFields}
         setSelectedReportsFields={setSelectedReportFields}
+        setSelectedSummaryFieldIds={setSelectedSummaryFieldIds}
+
       />
     </div>
   )
