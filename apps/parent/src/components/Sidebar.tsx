@@ -103,7 +103,7 @@ export default function Sidebar({ sideBarCollapsed }: SideCollapsedProps) {
       theme={{
         components: {
           Menu: {
-            itemHeight: 60,
+            itemHeight: 55,
             itemBorderRadius: 0,
             itemMarginInline: 0,
             iconSize: 12,
@@ -125,7 +125,7 @@ export default function Sidebar({ sideBarCollapsed }: SideCollapsedProps) {
       <Sider
         ref={sidebarRef}
         breakpoint="lg"
-        width="280"
+        width="250"
         collapsible
         onCollapse={(collapsed) => {
           collapsedFunc(collapsed);
@@ -152,7 +152,7 @@ export default function Sidebar({ sideBarCollapsed }: SideCollapsedProps) {
         <div className="no-scrollbar mt-8 h-[calc(100vh-180px)] overflow-auto">
           <Menu
             selectedKeys={selectedKeys}
-            className="!text-sm [&_.ant-menu-submenu-selected]:!font-medium [&_.ant-menu-submenu-selected_.ant-menu-submenu-title_.ant-menu-title-content]:font-semibold font-medium !px-2"
+            className="!text-xs [&_.ant-menu-submenu-selected]:!font-medium [&_.ant-menu-submenu-selected_.ant-menu-submenu-title_.ant-menu-title-content]:font-medium font-medium !px-2"
             openKeys={openKeys}
             mode="inline"
             items={adminSidebarItems}
@@ -257,7 +257,7 @@ export const adminSidebarItems: MenuProps["items"] = menuItems.map((item) => {
       key: child.key,
       label: (
         <span className="flex items-center">
-          <BulletIcon className="mr-3 size-2 child-bullet text-dp-gray text-sm" />
+          <BulletIcon className="mr-3 ml-6 size-1.5 child-bullet text-dp-gray text-sm" />
           {child.label}
         </span>
       ),

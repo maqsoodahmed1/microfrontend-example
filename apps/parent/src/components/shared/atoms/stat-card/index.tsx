@@ -38,7 +38,7 @@ export default function StatsCard({ color, label, value, icon, fieldKey, availab
     : [];
 
   return (
-    <div className='group border-dp-gray-light border-2 rounded-2xl px-1.5 py-2.5'>
+    <div className='group border-dp-gray-light border-2 rounded-2xl px-1.5 py-1.5'>
       {/* todo height change */}
       <div className="flex min-h-[98px] gap-1 justify-between shadow-sm shadow-off-white rounded-xl bg-white px-4 pt-5 pb-4">
         <div>

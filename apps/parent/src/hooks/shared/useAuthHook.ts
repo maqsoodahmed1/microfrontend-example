@@ -193,9 +193,9 @@ export const useAuthModule = () => {
         setData((prev) => ({ isAuthenticated: false, expirationTime: null, sessionData: null }))
         window.localStorage.clear()
         
-        // if (window.location.origin !== `${import.meta.env.REACT_APP_LOGIN_PORTAL}`) {
-        //     window.location.href = `${import.meta.env.REACT_APP_LOGIN_PORTAL}/login?redirectUrl=${window.location.href}`
-        // }
+        if (window.location.origin !== `${import.meta.env.VITE_LOGIN_PORTAL}`) {
+            window.location.href = `${import.meta.env.VITE_LOGIN_PORTAL}/login?redirectUrl=${window.location.href}`
+        }
     }
 
     const logout = async () => {

@@ -13,9 +13,9 @@ export default function DPSelect({
 }: DPSelectProps) {
     return (
         <Select
-            rootClassName="[&_.ant-select-item]:!font-semibold [&_.ant-select-item]:!text-dp-gray-blue"
+            rootClassName="[&_.ant-select-item]:!font-normal [&_.ant-select-item]:!text-dp-gray-blue"
             className={cn(
-                "[&_.ant-select-clear]:bg-white font-semibold",
+                "[&_.ant-select-clear]:bg-white font-normal",
                 className
             )}
             suffixIcon={

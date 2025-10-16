@@ -28,6 +28,11 @@ const ReportsPage = lazy(() => import('../../reports/src/pages/reports/ReportsPa
 const ReportsPage2 = lazy(() => import('reports/Page2'));
 const ReportsPage3 = lazy(() => import('reports/Page3'));
 
+export const INPUT_FONT_WEIGHT = {
+  numeric: 400,
+  string: "font-normal"
+};
+
 // Error boundary component
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
@@ -107,7 +112,7 @@ const App: React.FC = () => {
                 colorBorder: COLORS.DP_ICE_BLUE,
                 hoverBorderColor: getColorIntensity(COLORS.PRIMARY, 0.55),
                 activeBorderColor: getColorIntensity(COLORS.PRIMARY, 0.55),
-                fontWeightStrong: 600,
+                fontWeightStrong: 400,
                 colorTextPlaceholder: COLORS.DP_GRAY_SEMI,
               },
               Input: {

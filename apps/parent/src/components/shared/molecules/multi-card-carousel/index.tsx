@@ -1,6 +1,7 @@
 import React from "react";
 import Slider, { Settings } from "react-slick";
 import { cn } from "../../../../helpers/general.helpers";
+import { ArrowDownThin } from "../../../../assets/icons";
 
 interface MultiCardCarouselProps {
     children: React.ReactNode;
@@ -8,16 +9,57 @@ interface MultiCardCarouselProps {
     className?: string
 }
 
-/**
- * Default settings for the MultiCardCarousel.
- */
-const defaultSettings: Settings = {
+const PrevArrow = (props: any) => {
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className={className}
+            style={{
+                ...style,
+                left: "-25px",
+                zIndex: 1,
+            }}
+            onClick={onClick}
+        >
+            <ArrowDownThin className={cn("rotate-90 text-gray-600 hover:text-gray-800 cursor-pointer",
+                {
+                    "opacity-50 cursor-not-allowed": className.includes("slick-disabled"),
+                }
+            )} />
+        </div>
+    );
+};
+
+const NextArrow = (props: any) => {
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className={className}
+            style={{
+                ...style,
+                right: "-25px",
+                zIndex: 1,
+            }}
+            onClick={onClick}
+        >
+            <ArrowDownThin className={cn("-rotate-90 text-gray-600 hover:text-gray-800 cursor-pointer", {
+                "opacity-50 cursor-not-allowed": className.includes("slick-disabled"),
+            })} />
+        </div>
+    );
+};
+
+const 
+defaultSettings: Settings = {
     dots: false,
     infinite: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
+    arrows: true,
+    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow />,
     responsive: [
         {
             breakpoint: 1024,
@@ -46,9 +88,6 @@ const defaultSettings: Settings = {
     ],
 };
 
-/**
- * MultiCardCarousel component
- */
 const MultiCardCarousel: React.FC<MultiCardCarouselProps> = ({
     children,
     settings,

@@ -55,7 +55,7 @@ html {
     @apply [&_.ant-menu-item-icon]:flex [&_.ant-menu-item-icon]:!w-8 [&_.ant-menu-item-icon]:justify-center;
   
     /* selected item styling */
-    @apply [&_.ant-menu-item-selected]:!text-primary [&_.ant-menu-item-selected]:!border-0 [&_.ant-menu-item-selected]:!bg-primary/10 [&_.ant-menu-item-selected]:!font-semibold;
+    @apply [&_.ant-menu-item-selected]:!text-primary [&_.ant-menu-item-selected]:!border-0 [&_.ant-menu-item-selected]:!bg-primary/10 [&_.ant-menu-item-selected]:!font-medium;
     @apply [&_.ant-menu-item-selected_.child-bullet]:!text-primary;
   
     /* submenu styling */
@@ -82,4 +82,29 @@ html {
   
   .ant-table-wrapper .ant-table-ping-right .ant-table-cell-fix-right-first::after {
     box-shadow: inset -10px 0 8px -8px rgba(5, 5, 5, 0.06);
+  }
+
+  .floating-label {
+    position: relative;
+  }
+  .floating-label:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    z-index: 10;
+    font-weight: 600;
+    top: -6px;
+    font-size: .75rem;
+    color: var(--color-dp-gray-blue);
+    line-height: 1;
+    background-color: #fff;
+    padding-inline: .3125rem;
+    color: var(--color-dp-gray-semi);
+  }
+
+  .slick-arrow:before {
+    display: none;
+  }
+  .slick-arrow {
+    margin-top: 7px
   }

@@ -21,7 +21,7 @@ export default function PopoverDropdown({
                 <div className="flex items-center gap-2.5">
                     {icon}
                     <p className="!m-0 font-semibold text-dp-gray-blue">{label}</p>
-                    <ArrowDownThin className="text-dp-gray-blue size-4" />
+                    <ArrowDownThin className="text-dp-dark-blue size-3" />
                 </div>
             </Button>
         </Popover >

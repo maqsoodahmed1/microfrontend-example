@@ -1,5 +1,6 @@
 import { CountryCode, isValidPhoneNumber, PhoneNumber } from "libphonenumber-js";
 import { parsePhoneNumber } from "libphonenumber-js/min";
+import { COLORS, getColorIntensity } from "../constants/colors.constants";
 
 export default class Utils {
 
@@ -40,7 +41,7 @@ export default class Utils {
   public static formatDuration(totalSeconds: number): string {
     if (!totalSeconds || totalSeconds <= 0) return "0s";
 
-    totalSeconds = Math.floor(totalSeconds); // Ensure integer seconds
+    totalSeconds = Math.floor(totalSeconds); 
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
@@ -52,4 +53,22 @@ export default class Utils {
 
     return parts.join(' ');
   }
+
+  public static getRandomColor(index: number): string {
+    const colors = [
+      COLORS.PRIMARY,
+      COLORS.DP_DP_BLUE,
+      COLORS.DP_LIME_GREEN,
+      '#3B82F6',
+      '#10B981',
+      '#F59E0B',
+      '#EF4444',
+      '#8B5CF6',
+      '#06B6D4',
+      '#84CC16',
+      '#F97316',
+    ];
+    
+    return getColorIntensity(colors[index % colors.length], 0.55) || COLORS.PRIMARY;
+  };
 }
