@@ -34,8 +34,8 @@ export default function ReportsPage() {
 
   const [selectedReportFields, setSelectedReportFields] = useState<FieldItem[] | []>(defaultReportFields);
 
-  const [reportLoading, setReportLoading] = useState<boolean>(false);
-  const [summaryLoading, setSummaryLoading] = useState<boolean>(false);
+  const [reportLoading, setReportLoading] = useState<boolean>(true);
+  const [summaryLoading, setSummaryLoading] = useState<boolean>(true);
 
   const [selectedSummaryFieldIds, setSelectedSummaryFieldIds] = useState<string[] | []>([]);
 
@@ -95,9 +95,9 @@ export default function ReportsPage() {
   return (
     <div>
       {/* <Banner title='Analytics' buttonText='Export Data' description='Complete communication suite for modern businesses' className='mb-3.5' /> */}
-      <Banner title='Analytics' buttonText='Export Data' description='Complete communication suite for modern businesses' className='mb-3.5' />
+      <Banner title='Reports' buttonText='Export Data' description='Complete communication suite for modern businesses' className='mb-3.5' />
       {summaryLoading ?
-        <Spin spinning className='w-full h-[210px] !grid place-items-center mt-20' />
+        <Spin spinning className='w-full h-[121px] !grid place-items-center mt-20' />
         :
         <Stats
           summary={summary}

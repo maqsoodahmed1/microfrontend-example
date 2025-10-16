@@ -36,9 +36,10 @@ import Utils from '../../../../../parent/src/utils'
 import { FilterDropdown } from './FilterDropDown'
 
 import useCallRecordsTableColumns from '../../hooks/useCallRecordsTableColumns'
-import { setFilterType, setMultipleFilters } from '../../../store/slices/filter.slice';
+import { clearAllFilters, setFilterType, setMultipleFilters } from '../../../store/slices/filter.slice';
 import { AppDispatch, RootState } from '../../../store';
 import { FieldItem, ReportType } from '../../../types';
+import FiltersModal from '../../../components/organisms/FiltersModal';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -126,6 +127,9 @@ function ReportsTableInner<T>({ records, total, loading, selectedFields, setSele
     const routeFilterType = filterType[route] as ReportType;
     const routeFilters = filters[route] || {};
 
+    const handleDrawerApply = (values: any) => { dispatch(setMultipleFilters({ route, values })); setFilterOpen(false); };
+    const handleDrawerClear = () => dispatch(clearAllFilters({ route }));
+
     const columns = useCallRecordsTableColumns()
 
     const tableColumns = useMemo(() => {
@@ -165,14 +169,14 @@ function ReportsTableInner<T>({ records, total, loading, selectedFields, setSele
             <div className="flex items-center justify-between px-5 py-4">
                 <div className="flex items-center gap-2 2xl:gap-4">
                     <h2 className='text-xl font-bold !mb-0 text-dp-dark-blue'>Reports</h2>
-                    <Divider type="vertical" className='text-dp-gray-blue !h-8 !border-gray-300 !border-s-2' />
+                    <Divider type="vertical" className='text-dp-gray-blue !h-5 !border-gray-300 !border-s-2' />
                     <Button type='text' className='!p-0 !h-fit !bg-transparent'>
                         <DownloadStackIcon className='text-dp-blue' />
                         <p className='!m-0 font-medium !text-sm text-dp-blue'>Export Report</p>
                     </Button>
-                    <Divider type="vertical" className='text-dp-gray-blue !h-8 !border-gray-300 !border-s-2' />
+                    {/* <Divider type="vertical" className='text-dp-gray-blue !h-5 !border-gray-300 !border-s-2' /> */}
                     <FilterDropdown />
-                    <Divider type="vertical" className='text-dp-gray-blue !h-8 !border-gray-300 !border-s-2' />
+                    {/* <Divider type="vertical" className='text-dp-gray-blue !h-8 !border-gray-300 !border-s-2' /> */}
                     <div className="relative">
                         <DPSelect
                             value={routeFilterType}
@@ -188,8 +192,8 @@ function ReportsTableInner<T>({ records, total, loading, selectedFields, setSele
                                 { label: "Agents", value: "agents" }
                             ]}
                             placeholder="Select Report Type"
-                            suffixIcon={<ArrowDownThin className="text-dp-dark-blue !size-4" />}
-                            className="!w-[140px] [&_.ant-select-selector]:!rounded-md [&_.ant-select-selection-item]:!text-dp-gray-blue [&_.ant-select-selection-item]:!font-semibold !h-9 [&_.ant-select-selector]:!pl-11 [&_.ant-select-selection-search-input]:!pl-8"
+                            suffixIcon={<ArrowDownThin className="text-dp-dark-blue !size-3" />}
+                            className="[&_.ant-select-selector]:!rounded-md [&_.ant-select-selection-item]:!text-dp-gray-blue [&_.ant-select-selection-item]:!font-semibold !h-9 [&_.ant-select-selector]:!pl-11 [&_.ant-select-selection-search-input]:!pl-8"
                             showSearch
                         />
                         <CallIconPointy className="absolute top-[50%] text-dp-dark-blue -translate-y-[50%] left-4 !size-4" />
@@ -204,15 +208,7 @@ function ReportsTableInner<T>({ records, total, loading, selectedFields, setSele
                     </DPButton>
                 </div>
             </div>
-            <Modal width={720} closable={false} open={filterOpen} onCancel={() => setFilterOpen(false)} footer={null}>
-                <div className="flex items-center justify-between">
-                    <span className='text-primary font-semibold '>Advanced Filter</span>
-                </div>
-                <div className='grid grid-cols-3 gap'>
-                    <DPDateRangePicker className='!w-full col-span-2' placeholder={["Start Date", "End Date"]} />
-                    <DPSelect className='' />
-                </div>
-            </Modal>
+
             <DPTable
                 scroll={{ y: 315, x: columns.length * 140 + 100 }}
                 loading={loading}
@@ -234,8 +230,16 @@ function ReportsTableInner<T>({ records, total, loading, selectedFields, setSele
                     showQuickJumper: true,
                     showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
                 }}
-                columns={tableColumns}
-                dataSource={records} />
+                columns={tableColumns as any}
+                dataSource={records as any}
+            />
+
+            {filterOpen && <FiltersModal
+                filterOpen={filterOpen}
+                setFilterOpen={setFilterOpen}
+                handleApply={handleDrawerApply}
+                onClear={handleDrawerClear}
+            />}
         </div>
     )
 }

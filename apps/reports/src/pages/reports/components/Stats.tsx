@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux'
 
 import MultiCardCarousel from '../../../../../parent/src/components/shared/molecules/multi-card-carousel'
 import StatCard from '../../../../../parent/src/components/shared/atoms/stat-card'
-import { COLORS } from '../../../../../parent/src/constants/colors.constants'
-import { ReportIconWarn, ReportIconLeft, ReportIconRight } from '../../../../../parent/src/assets/icons' // todo: fix icons
+import { ReportIconWarn } from '../../../../../parent/src/assets/icons' // todo: fix icons
 import { SummaryData } from '../../../services/cdr.service'
 import { RootState } from '../../../store/'
+import Utils from '../../../../../parent/src/utils'
 
 export default function Stats({ summary, selectedSummaryFieldIds, onAddSummaryField, onRemoveSummaryField }: {
   summary: SummaryData<any>,
@@ -32,7 +32,7 @@ export default function Stats({ summary, selectedSummaryFieldIds, onAddSummaryFi
             fieldKey={id}
             label={label}
             value={summary?.[id]}
-            color={COLORS.PRIMARY}
+            color={Utils.getRandomColor(index)}
             icon={<ReportIconWarn className='text-white' />}
             availableSummaryFields={currentDef?.summaryFields}
             selectedSummaryFieldIds={effectiveSelected}

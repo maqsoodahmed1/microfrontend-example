@@ -66,11 +66,11 @@ export default function useCallRecordsTableColumns() {
                 if (record.duration) {
                     const durationSeconds = Number(record.duration) || 0;
                     const formatted = dayjs.utc(durationSeconds * 1000).format("HH:mm:ss");
-                    return <Tag>{formatted}</Tag>;
+                    return <p className="text-dp-gray-blue !m-0">{formatted}</p>;
                 } else if (!record.answered_at || !record.canceled_at) return null;
                 const durationSeconds = dayjs(record.canceled_at).diff(dayjs(record.answered_at), "seconds");
                 const formatted = dayjs.utc(durationSeconds * 1000).format("HH:mm:ss");
-                return <Tag>{formatted}</Tag>;
+                return <p className="text-dp-gray-blue !m-0">{formatted}</p>;
             },
         },
 
@@ -97,7 +97,7 @@ export default function useCallRecordsTableColumns() {
             render: (record: string) => {
                 const durationSeconds = Number(record) || 0;
                 const formatted = dayjs.utc(durationSeconds * 1000).format("HH:mm:ss");
-                return <Tag>{formatted}</Tag>;
+                return <p className="text-dp-gray-blue !m-0">{formatted}</p>;
             },
         },
         {
@@ -129,7 +129,7 @@ export default function useCallRecordsTableColumns() {
             render: (record: CallFields) => (
                 <Flex vertical>
                     <Avatar.Group
-                    className="[&_.ant-avatar]:!size-7 [&_.ant-avatar_.ant-avatar-string]:!text-[9px]"
+                        className="[&_.ant-avatar]:!size-7 [&_.ant-avatar_.ant-avatar-string]:!text-[9px]"
                         size="large"
                         maxCount={2}
                         style={{
@@ -144,7 +144,7 @@ export default function useCallRecordsTableColumns() {
                                 .filter(Utils.onlyUnique)
                                 .map((extension: string) => (
                                     <Avatar
-                    className="[&_.ant-avatar]:!size-10"
+                                        className="[&_.ant-avatar]:!size-10"
 
                                         style={{
                                             backgroundColor: Utils.getAvatarColor(extension),
@@ -166,7 +166,10 @@ export default function useCallRecordsTableColumns() {
             title: "Phone Number",
             key: "our_e164",
             dataIndex: "our_e164",
-            render: (numbers: string[]) => console.log(numbers)
+            render: (numbers: string[]) =>
+                numbers?.length
+                    ? numbers.map(num => Utils.formatPhoneNumber(num)).join(", ")
+                    : "-",
         },
         {
             title: "Other Phone Number(s)",

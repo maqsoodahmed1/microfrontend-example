@@ -122,6 +122,13 @@ const App: React.FC = () => {
                 hoverBorderColor: getColorIntensity(COLORS.PRIMARY, 0.55),
                 activeBorderColor: getColorIntensity(COLORS.PRIMARY, 0.55),
               },
+              InputNumber: {
+                controlHeight: 53,
+                borderRadius: 11,
+                colorBorder: COLORS.DP_ICE_BLUE,
+                hoverBorderColor: getColorIntensity(COLORS.PRIMARY, 0.55),
+                activeBorderColor: getColorIntensity(COLORS.PRIMARY, 0.55),
+              },
               Select: {
                 controlHeight: 53,
                 colorText: COLORS.DP_GRAY_DARK,

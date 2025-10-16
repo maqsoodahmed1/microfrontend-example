@@ -79,6 +79,9 @@ export default function DPTable({
                     [&_.ant-pagination-jump-prev]:!grid 
                     [&_.ant-pagination-jump-next]:!place-items-center 
                     [&_.ant-pagination-jump-prev]:!place-items-center
+
+                    [&_.ant-spin-dot]:!w-[20px]
+                    [&_.ant-spin-dot]:!h-[20px]
                     `,
                     className
                 )}
