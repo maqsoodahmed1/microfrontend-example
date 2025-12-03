@@ -82,7 +82,7 @@ const inventory = [
 const Inventory: React.FC = () => {
   return (
     <Container>
-      <Title>📋 Inventory Management</Title>
+      <Title>📋 Inventory Managementsss</Title>
       
       <Table>
         <TableHeader>

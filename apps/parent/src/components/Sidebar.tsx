@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -147,13 +147,29 @@ const menuData: MenuData[] = [
 ];
 
 const Sidebar: React.FC = () => {
-  const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({
-    Dashboard: true,
-    Products: false,
-    Analytics: false,
-    Settings: false
-  });
   const location = useLocation();
+  
+  // Determine which menu should be open based on current route
+  const getInitialOpenMenus = (): Record<string, boolean> => {
+    const path = location.pathname;
+    if (path.startsWith('/dashboard')) {
+      return { Dashboard: true, Products: false, Analytics: false, Settings: false };
+    } else if (path.startsWith('/products')) {
+      return { Dashboard: false, Products: true, Analytics: false, Settings: false };
+    } else if (path.startsWith('/analytics')) {
+      return { Dashboard: false, Products: false, Analytics: true, Settings: false };
+    } else if (path.startsWith('/settings')) {
+      return { Dashboard: false, Products: false, Analytics: false, Settings: true };
+    }
+    return { Dashboard: true, Products: false, Analytics: false, Settings: false };
+  };
+
+  const [openMenus, setOpenMenus] = useState<Record<string, boolean>>(getInitialOpenMenus());
+
+  // Update open menus when route changes
+  useEffect(() => {
+    setOpenMenus(getInitialOpenMenus());
+  }, [location.pathname]);
 
   const toggleMenu = (menuTitle: string) => {
     setOpenMenus(prev => ({

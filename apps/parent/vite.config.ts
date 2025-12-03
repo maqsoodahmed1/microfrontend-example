@@ -8,10 +8,10 @@ export default defineConfig({
     federation({
       name: 'parent',
       remotes: {
-        dashboard: 'http://localhost:4001/assets/remoteEntry.js',
-        products: 'http://localhost:4002/assets/remoteEntry.js',
-        analytics: 'http://localhost:4003/assets/remoteEntry.js',
-        settings: 'http://localhost:4004/assets/remoteEntry.js'
+        dashboard: 'https://newportal.dev.dataphone.cloud/dashboard/assets/remoteEntry.js',
+        products: 'https://newportal.dev.dataphone.cloud/products/assets/remoteEntry.js',
+        analytics: 'https://newportal.dev.dataphone.cloud/analytics/assets/remoteEntry.js',
+        settings: 'https://newportal.dev.dataphone.cloud/settings/assets/remoteEntry.js'
       },
       shared: ['react', 'react-dom']
     })
