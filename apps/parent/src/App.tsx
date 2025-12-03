@@ -31,7 +31,8 @@ const Loading: React.FC = () => (
     alignItems: 'center', 
     height: '200px' 
   }}>
-    <Spin size="large" tip="Loading micro-frontend..." />
+    <Spin size="large" />
+    <span style={{ marginLeft: '12px' }}>Loading micro-frontend...</span>
   </div>
 );
 

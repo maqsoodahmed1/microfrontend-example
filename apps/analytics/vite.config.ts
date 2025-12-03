@@ -24,7 +24,12 @@ export default defineConfig({
     minify: false
   },
   server: {
-    port: 4003
+    port: 4003,
+    host: '0.0.0.0',
+    allowedHosts: [
+      'test-microfrontend.dev.dataphone.cloud',
+      'localhost'
+    ]
   }
 });
 
